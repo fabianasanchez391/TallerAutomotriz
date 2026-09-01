@@ -1,0 +1,473 @@
+﻿@model proyectKN.Models.Cita
+
+@{
+    ViewData["Title"] = "Registro de Citas";
+    Layout = "_Layout";
+
+}
+<link href="~/css/cards.css" rel="stylesheet" />
+<link href="~/css/citas.css" rel="stylesheet" />
+
+<div class="citas-container">
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-danger text-center text-danger">
+        @ViewBag.Mensaje
+    </div>
+}
+    <!--
+Header -->
+<div class="citas-header" >
+<div >
+<h1 > Citas</h1 >
+<p > Gestión de citas registradas en el taller</p >
+</div >
+
+<button type="button"
+class="btn-nueva-cita"
+onclick="document.getElementById('ventanaRegistroCita').style.display='flex'" >
+<i class="fa-solid fa-calendar-plus" > </i >
+Nueva Cita
+</button >
+</div >
+
+<div class="busqueda-card" >
+<div class="busqueda-box" >
+<i class="fa-solid fa-magnifying-glass" > </i >
+<input type="text"
+id="buscarCita"
+placeholder="Buscar Cita..." >
+
+</div >
+</div >
+
+<div id="ventanaRegistroCita" class="modal-cita" >
+<div class="modal-contenido" >
+<h2 > Registro de Citas</h2 >
+<!-- FORMULARIO -->
+<form asp-action="RegistroCita"
+method="post"
+id="formRegistro"
+class="form-cita" >
+<!-- FILA 1 -->
+<div >
+<label > Cédula</label >
+<input type="text" asp-for="Cedula" placeholder="118784587" required onkeyup="ConsultarCliente();" >
+</div >
+
+<div >
+<label > Nombre Cliente</label >
+<input type="text" asp-for="NombreCliente" placeholder="Juan Carlos" readonly required >
+</div >
+
+<div >
+<label > Fecha</label >
+<input type="date"
+asp-for="FechaCita"
+id="FechaCita"
+required
+min="@DateTime.Now.ToString("yyyy-MM-dd")"
+onchange="cargarHorasOcupadas()" >
+</div >
+
+
+<div class="campo-horas" >
+<label > Hora</label >
+<div id="mensajeEstado" class="mensaje-estado" style="display:none;" >
+<span class="icono-estado" > </span >
+<div >
+<strong id="tituloEstado" > </strong >
+<p id="textoEstado" > </p >
+</div >
+</div >
+
+<div class="hora-grid" >
+<button type="button" class="btn-hora" data-hora="08:00" onclick="seleccionarHora('08:00', this)" > 08:00a.m</button >
+<button type="button" class="btn-hora" data-hora="09:00" onclick="seleccionarHora('09:00', this)" > 09:00a.m</button >
+<button type="button" class="btn-hora" data-hora="10:00" onclick="seleccionarHora('10:00', this)" > 10:00a.m</button >
+<button type="button" class="btn-hora" data-hora="11:00" onclick="seleccionarHora('11:00', this)" > 11:00a.m</button >
+<button type="button" class="btn-hora" data-hora="12:00" onclick="seleccionarHora('12:00', this)" > 12:00p.m</button >
+<button type="button" class="btn-hora" data-hora="13:00" onclick="seleccionarHora('13:00', this)" > 1:00p.m</button >
+<button type="button" class="btn-hora" data-hora="14:00" onclick="seleccionarHora('14:00', this)" > 2:00p.m</button >
+<button type="button" class="btn-hora" data-hora="15:00" onclick="seleccionarHora('15:00', this)" > 3:00p.m</button >
+<button type="button" class="btn-hora" data-hora="16:00" onclick="seleccionarHora('16:00', this)" > 4:00p.m</button >
+</div >
+<div id="mensajeHora" class="mensaje-validacion" > </div >
+
+<input type="hidden" asp-for="HoraCita" id="HoraCita" >
+</div >
+
+<div >
+<label > Teléfono</label >
+<input type="text" id="Telefono" asp-for="Telefono" placeholder="78459587" class="form-control" maxlength="8" required >
+</div >
+
+<div >
+<label >Correo</label >
+<input type="email" asp-for="Email" placeholder="juancarlo78@gmail.com"required >
+</div >
+<!-- FILA 3 -->
+<div >
+<label > Servicio</label >
+<input type="text" asp-for="Servicio" placeholder="Ajuste de frenos" required >
+</div >
+
+<div >
+<label > Estado</label >
+<input type="text" class="form-control" value="Confirmada" readonly / >
+</div >
+
+
+<div >
+<label > Creado por</label >
+<input type="text" class="form-control"
+value="@Context.Session.GetString("NombreUsuario")" readonly / >
+</div >
+<!-- BOTÓN -->
+<div class="form-botones" >
+<button type="submit" class="btn-guardar" >
+Guardar
+</button >
+
+<button type="button"
+class="btn-cancelar"
+onclick="cerrarModalCita()" >
+Cancelar
+</button >
+</div >
+
+</form >
+</div >
+</div >
+<!-- TABLA -->
+<div class="tabla-card" >
+<div id="ventanaEditarCita" class="modal-cita" >
+<div class="modal-contenido" >
+
+<div class="modal-header-cita" >
+<h2 > Editar Cita</h2 >
+</div >
+
+<form asp-action="EditarCita"
+method="post"
+class="form-cita" >
+
+<input type="hidden"
+asp-for="Consecutivo"
+id="editConsecutivo" / >
+
+<div >
+<label > Cédula</label >
+
+<input type="text"
+asp-for="Cedula"
+id="editCedula"
+readonly
+required / >
+</div >
+
+<div >
+<label > Nombre Cliente</label >
+
+<input type="text"
+asp-for="NombreCliente"
+id="editCliente"
+readonly
+required / >
+</div >
+
+<div >
+<label > Fecha</label >
+
+<input type="date"
+asp-for="FechaCita"
+id="editFechaCita"
+required
+min="@DateTime.Now.ToString("yyyy-MM-dd")"
+onchange="cargarHorasOcupadasEditar()"
+onkeydown="return false" / >
+</div >
+
+<div class="campo-horas" >
+<label > Hora</label >
+<div id="editmensajeEstado" class="mensaje-estado" style="display:none;" >
+<span class="icono-estado" > </span >
+<div >
+<strong id="editTituloEstado" > </strong >
+<p id="editTextoEstado" > </p >
+</div >
+</div >
+
+<div class="hora-grid" >
+<button type="button"
+class="btn-hora"
+data-hora="08:00"
+onclick="seleccionarHoraEditar('08:00', this)" >
+08:00 a.m
+</button >
+
+<button type="button"
+class="btn-hora"
+data-hora="09:00"
+onclick="seleccionarHoraEditar('09:00', this)" >
+09:00 a.m
+</button >
+
+<button type="button"
+class="btn-hora"
+data-hora="10:00"
+onclick="seleccionarHoraEditar('10:00', this)" >
+10:00 a.m
+</button >
+
+<button type="button"
+class="btn-hora"
+data-hora="11:00"
+onclick="seleccionarHoraEditar('11:00', this)" >
+11:00 a.m
+</button >
+
+<button type="button"
+class="btn-hora"
+data-hora="12:00"
+onclick="seleccionarHoraEditar('12:00', this)" >
+12:00 p.m
+</button >
+
+
+<button type="button"
+class="btn-hora"
+data-hora="13:00"
+onclick="seleccionarHoraEditar('13:00', this)" >
+1:00 p.m
+</button >
+
+
+
+<button type="button"
+class="btn-hora"
+data-hora="14:00"
+onclick="seleccionarHoraEditar('14:00', this)" >
+2:00 p.m
+</button >
+
+<button type="button"
+class="btn-hora"
+data-hora="15:00"
+onclick="seleccionarHoraEditar('15:00', this)" >
+3:00 p.m
+</button >
+
+
+<button type="button"
+class="btn-hora"
+data-hora="16:00"
+onclick="seleccionarHoraEditar('16:00', this)" >
+4:00 p.m
+</button >
+</div >
+<div id="editmensajeHora" class="mensaje-validacion" > </div >
+
+<input type="hidden"
+asp-for="HoraCita"
+id="editHoraCita" / >
+</div >
+<div >
+<label > Teléfono</label >
+
+<input type="text"
+asp-for="Telefono"
+id="editTelefono"
+maxlength="8"
+required / >
+</div >
+
+<div >
+<label > Correo</label >
+
+<input type="email"
+asp-for="Email"
+id="editEmail"
+required / >
+</div >
+
+<div >
+<label > Servicio</label >
+
+<input type="text"
+asp-for="Servicio"
+id="editServicio"
+required / >
+</div >
+
+<div >
+<label > Estado Cita</label >
+
+<select asp-for="Estado"
+id="editEstado"
+class="readonly-select" >
+
+@if (ViewBag.EstadoCita != null) {
+    foreach (var e in ViewBag.EstadoCita) {
+        <option value="@e.Consecutivo"> @e.Estado </option>
+    }
+}
+
+                                                    </select>
+                                                </div>
+
+                                                <div>
+                                                    <label>Creado Por</label>
+
+                                                    <input type="text"
+                                                           id="editCreadoPorTexto"
+                                                           value="@Context.Session.GetString("NombreUsuario")"
+                                                           readonly />
+
+                                                    <input type="hidden"
+                                                           asp-for="CreadaPor"
+                                                           id="editCreadoPor"
+                                                           value="@Context.Session.GetString("IdUsuario")" />
+                                                </div>
+                                                <div>
+                                                    <label>Modificado Por</label>
+
+                                                    <input type="text"
+                                                           id="editModificadoPorTexto"
+                                                           value="@Context.Session.GetString("NombreUsuario")"
+                                                           readonly />
+
+                                                    <input type="hidden"
+                                                           asp-for="ModificadoPor"
+                                                           id="editModificadoPor"
+                                                           value="@Context.Session.GetString("IdUsuario")" />
+                                                </div>
+
+                                                <div class="form-botones">
+
+                                                    <button type="submit"
+                                                            class="btn-guardar">
+                                                        Guardar
+                                                    </button>
+
+                                                    <button type="button"
+                                                            class="btn-cancelar"
+                                                            onclick="document.getElementById('ventanaEditarCita').style.display='none'">
+
+                                                        Cancelar
+
+                                                    </button>
+
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                    
+
+                                        <div class="table-container">
+                                     <table id="tablaCita" class=" table tabla-paginada">
+
+                                        <thead>
+                                            <tr>
+                                                <th>Cliente</th>
+                                                <th>Correo</th>
+                                                <th>Cédula</th>
+                                                <th>Fecha</th>
+                                                <th>Hora</th>
+                                                <th>Teléfono</th>
+                                                <th>Servicio</th>
+                                                <th>Estado</th>
+                                                <th>Creado por</th>
+                                                <th>Modificado Por</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                                <tr id="sinResultadosCita" hidden>
+                                                    <td colspan="11" class="sin-resultados-tabla">
+                                                        No se encontraron resultados
+                                                    </td>
+                                                </tr>
+                                            @if (ViewBag.Cita != null && ViewBag.Cita.Count > 0)
+                                            {
+                                                foreach (var item in ViewBag.Cita)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <div class="user-info">
+                                                                <strong>@item.NombreCliente</strong>
+                                                            </div>
+                                                        </td>
+
+                                                        <td>@item.Email</td>
+                                                        <td>@item.Cedula</td>
+                                                        <td>@item.FechaCita.ToString("dd/MM/yyyy")</td>
+                                                            <td class="hora">
+                                                                @DateTime.Today.Add(item.HoraCita).ToString("h:mm tt")
+                                                            </td>
+                                                        <td>@item.Telefono</td>
+                                                        <td>@item.Servicio</td>
+
+                                                        <td>
+                                                            <span class="badge
+                                                                @(item.Estado == "Pendiente" ? "pendiente" :
+                                                                                                        item.Estado == "Confirmada" ? "confirmada" :
+                                                                                                        item.Estado == "Cancelada" ? "cancelada" :
+                                                                                                        item.Estado == "Finalizada" ? "completada" : "pendiente")">
+                                                                @item.Estado
+                                                            </span>
+                                                        </td>
+
+                                                        <td>@item.CreadaPor</td>
+                                                            <td>@item.ModificadoPor</td>
+
+                                                        <td class="acciones">
+                                                            <button type="button"
+                                                                    class="icon editar"
+                                                                    onclick="abrirEditarCita(
+                                                                '@item.Consecutivo',
+                                                                '@item.Cedula',
+                                                                '@item.NombreCliente',
+                                                                '@item.FechaCita.ToString("yyyy-MM-dd")',
+                                                                '@item.HoraCita',
+                                                                '@item.Telefono',
+                                                                '@item.Email',
+                                                                '@item.Servicio',
+                                                                '@item.Estado'
+                                                                )">
+                                                                <i class="fa-solid fa-pen"></i>
+                                                            </button>
+                                                                <button type="button"
+                                                                        class="icon cancelar"
+                                                                        onclick="confirmarCancelacion(@item.Consecutivo)">
+
+                                                                    <i class="fa-solid fa-ban"></i>
+                                                                </button>
+
+                                                            </td>
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td colspan="11" class="text-center text-muted">
+                                                        No hay citas registradas
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                        <div class="paginacion"></div>
+                                    </div>
+                                       
+
+                            </div>
+                            </div>
+                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                            <script src="~/js/paginacion.js"></script>
+                            <script src="~/js/cita.js"></script>
+                           

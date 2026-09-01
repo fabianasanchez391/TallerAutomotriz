@@ -1,0 +1,190 @@
+﻿
+@model proyectKN.Models.Egreso
+
+@{
+    ViewData["Title"] = "Registro de Egresos";
+    Layout = "_Layout";
+}
+
+<link href="~/css/egreso.css" rel="stylesheet" />
+
+<div class="egresos-container">
+    <div class="egresos-header">
+        <div>
+            <h1>Egresos</h1>
+            <p>Gestión de egresos del sistema</p>
+        </div>
+
+        <button type="button" class="btn-nuevo-egreso"
+                onclick="document.getElementById('ventanaRegistroEgreso').style.display='flex'">
+            <i class="fas fa-arrow-down"></i>
+            Nuevo Egreso
+        </button>
+    </div>
+    <div class="busqueda-card">
+        <div class="busqueda-box">
+            <i class="fa-solid fa-magnifying-glass"> </i>
+            <input type="text"
+                   id="buscarEgreso"
+                   placeholder="Buscar Egreso...">
+        </div>
+    </div>
+
+    <div id="ventanaRegistroEgreso" class="modal-egreso">
+        <div class="modal-contenido-egreso">
+            <h2>Registro de Egreso</h2>
+
+            <form asp-action="RegistroEgreso" asp-controller="Contavilidad" method="post" class="form-egreso">
+                <div>
+                    <label>Motivo de Egreso</label>
+                    <input type="text" asp-for="Motivo" required />
+                </div>
+
+                <div>
+                    <label>Monto</label>
+                    <input type="number" asp-for="Monto" required />
+                </div>
+
+                <div>
+                    <label>Cantidad</label>
+                    <input type="number" asp-for="Cantidad" min="1" required />
+                </div>
+
+                <div>
+                    <label>Método de Pago</label>
+                    <select asp-for="MetodoPago" required>
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Tarjeta">Tarjeta</option>
+                        <option value="Sinpe">Sinpe</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Creado por</label>
+                    <input type="text" value="@Context.Session.GetString("NombreUsuario")" readonly />
+                    <input type="hidden" asp-for="RegistradoPor" value="@Context.Session.GetString("IdUsuario")" />
+                </div>
+
+                <div class="form-botones-egreso">
+                    <button type="submit" class="btn-guardar">Guardar</button>
+                    <button type="button" class="btn-cancelar"
+                            onclick="document.getElementById('ventanaRegistroEgreso').style.display='none'">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="tabla-card">
+    <div id="ventanaEditarEgreso" class="modal-egreso">
+        <div class="modal-contenido-egreso">
+            <h2>Editar Egreso</h2>
+
+            <form asp-action="EditarEgreso" asp-controller="Contavilidad" method="post" class="form-egreso">
+                <input type="hidden" asp-for="Consecutivo" id="editConsecutivo" />
+
+                <div>
+                    <label>Motivo de Egreso</label>
+                    <input type="text" asp-for="Motivo" id="editMotivo" readonly required />
+                </div>
+
+                <div>
+                    <label>Monto</label>
+                    <input type="number" asp-for="Monto" id="editMonto" readonly required />
+                </div>
+
+                <div>
+                    <label>Cantidad</label>
+                    <input type="number" asp-for="Cantidad" id="editCantidad" readonly required />
+                </div>
+
+                <div>
+                    <label>Método de Pago</label>
+                    <select asp-for="MetodoPago" id="editMetodoPago" required>
+                        <option value="Tarjeta">Tarjeta</option>
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Sinpe">Sinpe</option>
+                    </select>
+                </div>
+
+                <div>
+    <label>Usuario</label>
+
+    <input type="text"
+           id="editRegistradoPorTexto"
+           readonly />
+                    <input type="hidden"
+                           asp-for="RegistradoPor"
+                           id="editRegistradoPor"
+                           value="@Context.Session.GetString("IdUsuario")" />
+</div>
+
+                <div class="form-botones-egreso">
+                    <button type="submit" class="btn-guardar">Guardar</button>
+                    <button type="button" class="btn-cancelar"
+                            onclick="document.getElementById('ventanaEditarEgreso').style.display='none'">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+        <div class="table-container">
+            <table id="tablaEgreso" class=" table tabla-paginada">
+       
+            <thead>
+                <tr>
+                    <th>Motivo de Egreso</th>
+                    <th>Monto</th>
+                    <th>Cantidad</th>
+                    <th>Método de Pago</th>
+                    <th>Registrado Por</th>
+                    <th>Fecha de Egreso</th>
+                    <th class="col-acciones">Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                    <tr id="sinResultadosEgreso" hidden>
+                        <td colspan="7" class="sin-resultados-tabla">
+                            No se encontraron resultados
+                        </td>
+                    </tr>
+                @if (ViewBag.Egreso != null && ViewBag.Egreso.Count > 0)
+                {
+                    foreach (var item in ViewBag.Egreso)
+                    {
+                        <tr>
+                            <td>@item.Motivo</td>
+                            <td>₡@item.Monto</td>
+                            <td>@item.Cantidad</td>
+                            <td>@item.MetodoPago</td>
+                            <td>@item.RegistradoPor</td>
+                            <td>@item.Fecha</td>
+                            <td class="acciones">
+                                <button type="button" class="icon editar"
+                                        onclick="abrirEditarEgreso(
+                                            '@item.Consecutivo',
+                                            '@item.Motivo',
+                                    '@item.Monto.ToString(System.Globalization.CultureInfo.InvariantCulture)',
+                                            '@item.Cantidad',
+                                            '@item.MetodoPago',
+                                            '@item.RegistradoPor',
+                                            '@item.RegistradoPor'
+                                        )">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="paginacion"></div>
+</div>
+</div>
+</div>
+<script src="~/js/paginacion.js"></script>
+    <script src="~/js/contabilidad.js"></script>
+<script src="~/js/egreso.js"></script>

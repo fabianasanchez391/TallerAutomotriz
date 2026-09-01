@@ -1,0 +1,172 @@
+﻿@model proyectKN.Models.HorarioRequest
+
+@{
+    ViewData["Title"] = "Gestión de Horarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css">
+<link href="~/css/horario.css" rel="stylesheet" />
+
+<div class="horario-container">
+
+    <div class="horario-header">
+        <div>
+            <h1>Gestión de horarios del taller</h1>
+            <p>Seleccione qué días estará abierto el taller y cuáles horas estarán disponibles.</p>
+        </div>
+    </div>
+
+    <div class="horario-grid">
+
+        <section class="calendar-section">
+            <div id="calendar"></div>
+        </section>
+
+        <form id="formHorario" 
+            asp-action="GestionHorario" 
+            method="post">
+
+            <aside class="config-card">
+
+                <h2>Configurar horario</h2>
+                <p>Defina un rango de fechas y el estado del taller.</p>
+
+                <div class="selected-date-box">
+
+                    <span>Rango de fechas</span>
+
+                    <div class="date-range-grid">
+
+                        <div>
+                            <label for="fechaInicio">Desde</label>
+
+                            <input type="date"
+                                   id="fechaInicio"
+                                   name="FechaInicio"
+                                   class="custom-input"
+                                   onchange="validarRangoFechas()"
+                                   required>
+                        </div>
+
+                        <div>
+                            <label for="fechaFin">Hasta</label>
+
+                            <input type="date"
+                                   id="fechaFin"
+                                   name="FechaFin"
+                                   class="custom-input"
+                                   onchange="validarRangoFechas()"
+                                   required>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label for="estadoDia">Estado del taller</label>
+
+                    <select id="estadoDia"
+                            name="Estado"
+                            class="custom-input"
+                            onchange="cambiarEstadoDia()"
+                            required>
+
+                        @if (ViewBag.EstadoHorario != null)
+                        {
+                            foreach (var e in ViewBag.EstadoHorario)
+                            {
+                                <option value="@e.Consecutivo">
+                                    @e.Estado
+                                </option>
+                            }
+                        }
+
+                    </select>
+
+                </div>
+
+                <div class="hours-panel" id="hoursPanel">
+
+                    <div class="hours-header">
+                        <span>Horas disponibles</span>
+                        <small>Seleccione las horas que desea habilitar para citas.</small>
+                    </div>
+
+                    <div class="hours-grid">
+
+                        <label class="hora-card">
+                            <input type="checkbox" name="HorasSeleccionadas" value="08:00">
+                            <span>8:00 AM</span>
+                        </label>
+
+                        <label class="hora-card">
+                            <input type="checkbox" name="HorasSeleccionadas" value="09:00">
+                            <span>9:00 AM</span>
+                        </label>
+
+                        <label class="hora-card">
+                            <input type="checkbox" name="HorasSeleccionadas" value="10:00">
+                            <span>10:00 AM</span>
+                        </label>
+
+                        <label class="hora-card">
+                            <input type="checkbox" name="HorasSeleccionadas" value="11:00">
+                            <span>11:00 AM</span>
+                        </label>
+
+                        <label class="hora-card">
+                            <input type="checkbox" name="HorasSeleccionadas" value="12:00">
+                            <span>12:00 PM</span>
+                        </label>
+
+                        <label class="hora-card">
+                            <input type="checkbox" name="HorasSeleccionadas" value="13:00">
+                            <span>1:00 PM</span>
+                        </label>
+
+                        <label class="hora-card">
+                            <input type="checkbox" name="HorasSeleccionadas" value="14:00">
+                            <span>2:00 PM</span>
+                        </label>
+
+                        <label class="hora-card">
+                            <input type="checkbox" name="HorasSeleccionadas" value="15:00">
+                            <span>3:00 PM</span>
+                        </label>
+
+                        <label class="hora-card">
+                            <input type="checkbox" name="HorasSeleccionadas" value="16:00">
+                            <span>4:00 PM</span>
+                        </label>
+
+                    </div>
+                </div>
+
+             
+
+                <button type="submit" id = "btnGuardar" class="btn-guardar">
+                    <i class="fas fa-save"></i>
+                    Guardar configuración
+                </button>
+
+                <button type="button" id="btnCancelar" class="btn-cancelar" onclick="cancelarConfiguracion()">
+                    <i class="fas fa-times"></i>
+                    Cancelar
+                </button>
+            </aside>
+
+        </form>
+
+    </div>
+
+</div>
+<script>
+    window.horarios = @Html.Raw(Json.Serialize(ViewBag.Horarios));
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/locales-all.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+<script src="~/js/gestionhorario.js"></script>

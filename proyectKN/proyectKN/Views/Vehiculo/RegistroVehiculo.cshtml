@@ -1,0 +1,404 @@
+﻿@model proyectKN.Models.Vehiculo
+
+@{
+    ViewData["Title"] = "Registro de Vehículos";
+    Layout = "_Layout";
+}
+
+<link href="~/css/vehiculo.css" rel="stylesheet" />
+
+<div class="vehiculos-container">
+    @*
+     @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert alert-danger text-center"> @ViewBag.Mensaje </div>
+    }
+   *@
+    <!-- Header -->
+    <div class="vehiculos-header">
+        <div>
+            <h1>Vehículos</h1>
+            <p>Gestión de vehículos registrados en el taller</p>
+        </div>
+
+        <button type="button"
+                class="btn-nuevo-vehiculo"
+                onclick="document.getElementById('ventanaRegistroVehiculo').style.display='flex'">
+            <i class="fa-solid fa-car"></i>
+            Nuevo Vehículo
+        </button>
+    </div>
+    
+    <div class="busqueda-card">
+        <div class="busqueda-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text"
+                   id="buscarVehiculo"
+                   placeholder="Buscar Vehículo...">
+        </div>
+    </div>
+
+    <div id="ventanaRegistroVehiculo" class="modal-vehiculo">
+        <div class="modal-contenido">
+            <h2>Nuevo Vehículo</h2>
+            <!-- FORMULARIO -->
+            <form asp-action="RegistroVehiculo"
+                  asp-controller="Vehiculo"
+                  method="post"
+                  class="form-vehiculo"
+                  onsubmit="return validarFormulario();">
+                <input type="hidden" id="mensajeServidor" value="@ViewBag.Mensaje" />
+
+                <div>
+                    <label>Marca del vehículo</label>
+                    <input type="text" asp-for="Marca" placeholder="Toyota" required>
+                    </div>
+
+                    <div>
+                        <label>Modelo del vehículo</label>
+                        <input type="text" asp-for="Modelo" placeholder="Corolla" required>
+                        </div>
+
+                        <div>
+                            <label>Año del vehículo</label>
+                            <input type="text" id="Anio" asp-for="Anio" maxlength="4" placeholder="2020" required>
+                            </div>
+
+                            <div>
+                                <label>Placa del vehículo</label>
+                                <input type="text" asp-for="Placa" id="Placa" maxlength="6" placeholder="ABC-250" required>
+                                </div>
+
+                                <div>
+                                    <label>Cédula</label>
+                                    <input type="text" asp-for="Cedula" placeholder="118784523" required onkeyup="ConsultarDueno();">
+                                        
+                                    </div>
+
+                                    <div>
+                                        <label>Nombre del dueño</label>
+                                        <input type="text" asp-for="Nombre_Cliente" placeholder="Juan Carlos" readonly required>
+                                            <span id="errorNombre" class="text-danger"></span>
+                                        </div>
+
+                                        <div>
+                                            <label>Teléfono</label>
+                                            <input type="text" id="Telefono" asp-for="Telefono" maxlength="8" placeholder="78451236" required>
+                                            </div>
+
+                                            <div>
+                                                <label>Estado</label>
+                                                <input type="text" value="Ingresado" class="input-readonly" readonly>
+                                            </div>
+
+                                            <div>
+
+                                                <label>Problema reportado</label>
+                                                <input type="text" asp-for="Problema" maxlength="500" placeholder="Cambio de aceite y ajuste de frenos" required>
+                                                </div>
+
+                                                <div>
+                                                    <label>Revición Incial</label>
+                                                    <input type="text" asp-for="Revision" maxlength="500" placeholder="Golpes en puerta izquierda delantera y trasera" required>
+                                                    </div>
+
+                                                    <div>
+                                                        <label>Deuda reparación</label>
+                                                        <input asp-for="Deuda" type="number" step="0.01" placeholder="80000" />
+                                                    </div>
+
+                                                    <div>
+                                                        <label>Monto recibido</label>
+                                                        <input asp-for="Monto" type="number" step="0.01" placeholder="20000" />
+                                                    </div>
+
+                                                    <div class="form-botones">
+                                                        <button type="submit" class="btn-guardar">
+                                                            Guardar
+                                                        </button>
+
+                                                        <button type="button"
+                                                                class="btn-cancelar"
+                                                                onclick="limpiarFormularioVehiculo()">
+                                                            Cancelar
+                                                        </button>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="tabla-card">
+
+                                            <div id="ventanaEditarVehiculo" class="modal-vehiculo">
+                                                <div class="modal-contenido">
+                                                    <h2>Editar Vehículo</h2>
+
+                                                    <form asp-action="EditarVehiculo"
+                                                          asp-controller="Vehiculo"
+                                                          method="post"
+                                                          class="form-vehiculo">
+
+                                                        <input type="hidden"
+                                                               asp-for="Consecutivo"
+                                                               id="editConsecutivo" />
+
+                                                        <div>
+                                                            <label>Marca del vehículo</label>
+
+                                                            <input type="text"
+                                                                   asp-for="Marca"
+                                                                   id="editMarca"
+                                                                   readonly
+                                                                   required>
+                                                            </div>
+
+                                                            <div>
+                                                                <label>Modelo del vehículo</label>
+
+                                                                <input type="text"
+                                                                       asp-for="Modelo"
+                                                                       id="editModelo"
+                                                                       readonly
+                                                                       required>
+                                                                </div>
+
+                                                                <div>
+                                                                    <label>Año del vehículo</label>
+
+                                                                    <input type="number"
+                                                                           asp-for="Anio"
+                                                                           id="editAnio"
+                                                                           readonly
+                                                                           required>
+                                                                    </div>
+
+                                                                    <div>
+                                                                        <label>Placa del vehículo</label>
+
+                                                                        <input type="text"
+                                                                               asp-for="Placa"
+                                                                               id="editPlaca"
+                                                                               maxlength="6"
+                                                                               readonly
+                                                                               required>
+                                                                        </div>
+
+                                                                        <div>
+                                                                            <label>Cédula</label>
+
+                                                                            <input type="text"
+                                                                                   asp-for="Cedula"
+                                                                                   id="editCedula"
+                                                                                   required
+                                                                                   onkeyup="ConsultarDueno();">
+                                                                            </div>
+
+                                                                            <div>
+                                                                                <label>Nombre del propietario</label>
+
+                                                                                <input type="text"
+                                                                                       asp-for="Nombre_Cliente"
+                                                                                       id="editPropietario"
+                                                                                       readonly
+                                                                                       required>
+                                                                                </div>
+
+                                                                                <div>
+                                                                                    <label>Teléfono</label>
+
+                                                                                    <input type="text"
+                                                                                           asp-for="Telefono"
+                                                                                           id="editTelefono"
+                                                                                           maxlength="8"
+                                                                                           required>
+                                                                                    </div>
+
+                                                                                    <div>
+                                                                                        <label>Estado</label>
+
+                                                                                        <select asp-for="Estado"
+                                                                                                id="editEstado"
+                                                                                                required>
+
+                                                                                            @if (ViewBag.Estado != null)
+                                                                                            {
+                                                                                                foreach (var e in ViewBag.Estado)
+                                                                                                {
+                                                                                                    <option value="@e.Consecutivo">
+                                                                                                        @e.Estado
+                                                                                                    </option>
+                                                                                                }
+                                                                                            }
+
+                                                                                        </select>
+                                                                                    </div>
+
+                                                                                    <div>
+                                                                                        <label>Problema reportado</label>
+
+                                                                                        <input type="text"
+                                                                                               asp-for="Problema"
+                                                                                               id="editProblema"
+                                                                                               required>
+                                                                                        </div>
+
+                                                                                        <div>
+                                                                                            <label>Revisión Inicial</label>
+
+                                                                                            <input type="text"
+                                                                                                   asp-for="Revision"
+                                                                                                   id="editRevision"
+                                                                                                   readonly
+                                                                                                   required>
+                                                                                            </div>
+
+                                                                                            <div>
+                                                                                                <label>Deuda reparación</label>
+                                                                                                <input  type="number" 
+                                                                                                    asp-for="Deuda" 
+                                                                                                    id="editDeudaVehiculo"  
+                                                                                                    step="0.01" 
+                                                                                                     readonly required/>
+                                                                                                </div>
+
+                                                                                                <div>
+                                                                                                    <label>Monto recibido</label>
+                                                                                                    <input type="number" 
+                                                                                                        asp-for="Monto" 
+                                                                                                        id="editMontoVehiculo" 
+                                                                                                        step="0.01" 
+                                                                                                        required />
+                                                                                                </div>
+
+                                                                                                <div class="form-botones">
+
+                                                                                                    <button type="submit"
+                                                                                                            class="btn-guardar">
+                                                                                                        Guardar
+                                                                                                    </button>
+
+                                                                                                    <button type="button"
+                                                                                                            class="btn-cancelar"
+                                                                                                            onclick="document.getElementById('ventanaEditarVehiculo').style.display='none'">
+
+                                                                                                        Cancelar
+
+                                                                                                    </button>
+
+                                                                                                </div>
+
+                                                                                            </form>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                  
+                                                                                    <div class="table-container">
+                                                                                        <table id="tablaVehiculo" class="table tabla-paginada">
+                                                                                            <thead>
+                                                                                                <tr>
+
+                                                                                                    <th>Marca</th>
+                                                                                                    <th>Placa</th>
+                                                                                                    <th>Modelo</th>
+                                                                                                    <th>Año</th>
+                                                                                                    <th>Estado</th>
+                                                                                                    <th>Problema</th>
+                                                                                                    <th>Revisión</th>
+                                                                                                    <th>Dueño</th>
+                                                                                                    <th>Cédula</th>
+                                                                                                    <th>Contacto</th>
+                                                                                                    <th>Monto</th>
+                                                                                                    <th>Deuda</th>
+                                                                                                    <th>Acciones</th>
+                                                                                                </tr>
+                                                                                            </thead>
+
+                                                                                            <tbody>
+                                                                                                <tr id="sinResultadosVehiculo" hidden>
+                                                                                                    <td colspan="13" class="sin-resultados-tabla">
+                                                                                                        No se encontraron resultados
+                                                                                                    </td>
+                                                                                                </tr>
+                                          
+                                                                                                @if (ViewBag.Vehiculos != null && ViewBag.Vehiculos.Count > 0)
+                                                                                                {
+                                                                                                    foreach (var item in ViewBag.Vehiculos)
+                                                                                                    {
+                                                                                                        <tr>
+                                                                                                            <td>
+                                                                                                                <div class="vehiculo-info">
+                                                                                                                    <strong>@item.Marca</strong>
+                                                                                                                </div>
+                                                                                                            </td>
+
+                                                                                                            <td>@item.Placa</td>
+                                                                                                            <td>@item.Modelo</td>
+                                                                                                            <td>@item.Anio</td>
+                                                                                                            <td>
+                                                                                                                <span class="badge
+                                                                                                                    @(item.Estado == "Ingresado" ? "ingresado" :
+                                                                                                                                                                                                                                     item.Estado == "Revisado" ? "revisado" :
+                                                                                                                                                                                                                                      item.Estado == "Reparando" ? "reparando" : "")">
+
+                                                                                                                    @item.Estado
+                                                                                                                </span>
+                                                                                                            </td>
+
+                                                                                                            <td>@item.Problema</td>
+                                                                                                            <td>@item.Revision</td>
+                                                                                                            <td>@item.Nombre_Cliente</td>
+                                                                                                            <td>@item.Cedula</td>
+                                                                                                            <td>@item.Telefono</td>
+
+                                                                                                            <td>₡@item.Monto</td>
+                                                                                                            <td>₡@item.Deuda</td>
+                                                                                                     
+                                                                                                       
+
+                                                                                                            <td class="acciones">
+                                                                                                                <button type="button"
+                                                                                                                        class="icon editar"
+                                                                                                                        onclick="abrirEditarVehiculo(
+                                                                                                                    '@item.Consecutivo',
+                                                                                                                    '@item.Marca',
+                                                                                                                    '@item.Modelo',
+                                                                                                                    '@item.Anio',
+                                                                                                                    '@item.Placa',
+                                                                                                                    '@item.Cedula',
+                                                                                                                    '@item.Nombre_Cliente',
+                                                                                                                    '@item.Telefono',
+                                                                                                                    '@item.Estado',
+                                                                                                                    '@item.Problema',
+                                                                                                                    '@item.Revision',
+                                                                                                                '@item.Deuda.ToString().Replace(",", ".")',
+                                                                                                                '@item.Monto.ToString().Replace(",", ".")'
+                                                                                                               
+                                                                                                                    )">
+                                                                                                                    <i class="fa-solid fa-pen"></i>
+                                                                                                                </button>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                    }
+                                                                                                }
+                                                                                                else
+                                                                                                {
+                                                                                                    <tr>
+                                                                                                        <td colspan="13" class="text-center text-muted">
+                                                                                                            No hay vehículos registrados
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                }
+                                                                                            </tbody>
+                                                                                        </table>
+                               
+                                                                                        <div class="paginacion"></div>
+
+                                                                                    </div>
+                         
+                                                                                </div>
+                                                                                 </div>
+                                                                                <script src="~/js/vehiculo.js"></script>
+                                                                                <script src="~/js/paginacion.js"></script>
+                      

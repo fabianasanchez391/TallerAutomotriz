@@ -1,0 +1,166 @@
+﻿
+
+input,
+textarea,
+select {
+    border: none;
+    background: #ffffff;
+    border-bottom: 1px solid #ccc;
+    padding: 8px 4px;
+    font-size: 14px;
+    outline: none;
+    color: #000000;
+}
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+    }
+
+    select option {
+        background: #fff; /* mismo fondo del formulario */
+        color: #000000;
+    }
+
+    select:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px #5fa8d3;
+    }
+
+    select::selection {
+        background: #5fa8d3;
+        color: #fff;
+    }
+
+
+/* FORZAR FOOTER NEGRO */
+
+/* FORZAR INPUTS TRANSPARENTES */
+.field input,
+.field textarea,
+.field select {
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.4) !important;
+    color: #fff !important;
+}
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+        background-color: transparent !important;
+        outline: none;
+        box-shadow: none;
+    }
+
+.ReadOnly {
+    cursor: not-allowed
+}
+
+.form-floating > label {
+    background-color: transparent !important;
+    padding: 0 5px;
+}
+
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+    background-color: transparent !important;
+}
+
+.btn-cancelar {
+    background-color: red;
+    border-color: red;
+    color: white;
+}
+
+    .btn-cancelar:hover {
+        background-color: darkred;
+    }
+
+.hora-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+    .hora-grid button {
+        padding: 12px;
+        color: #000000;
+        background-color: #ffffff;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.2s;
+        border: 1px solid #d1d5db;
+    }
+
+        .hora-grid button:hover {
+            background-color: #5fa8d3;
+            color: #1e1e2f;
+        }
+
+        .hora-grid button.activo {
+            background-color: #0077b6;
+            color: #ffffff;
+            border-color: #0077b6;
+        }
+.hora-ocupada {
+    background-color: #dc3545;
+    color: white;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: #161a1d !important;
+    ;
+}
+
+.text-dark {
+    --bs-text-opacity: 1;
+    color: #fbfbfb !important;
+    
+}
+.alert {
+    width: 90%;
+    margin: 20px auto;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 500;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+.btn-hora.activo {
+    background-color: #409fd7;
+    color: #fff;
+    border: 2px solid #000;
+}
+
+.hora-pasada {
+    background-color: #6c757d;
+    color: white;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.hora-ocupada {
+    background-color: #dc3545;
+    color: white;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+
+.alerta-stock {
+    padding: 6px 10px;
+    font-size: 18px;
+    border-radius: 6px;
+    background-color: #fff3cd;
+    border: 1px solid #ffe69c;
+    color: #856404;
+}
+.fila-stock-bajo td {
+    color: #e74c3c;
+    font-weight: 500;
+}
+

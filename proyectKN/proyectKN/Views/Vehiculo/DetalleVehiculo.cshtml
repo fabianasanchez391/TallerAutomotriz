@@ -1,0 +1,19 @@
+﻿@model proyectKN.Models.VehiculoConsultaSimple
+
+@if (Model != null)
+{
+    <div class="vehicle-card">
+
+        <h2>🚗 @Model.Placa</h2>
+
+        <p><strong>Estado:</strong> @Model.Estado</p>
+        <p><strong>Marca:</strong> @Model.Marca</p>
+        <p><strong>Modelo:</strong> @Model.Modelo</p>
+
+
+    </div>
+}
+else
+{
+    <p>Vehículo no encontrado</p>
+}

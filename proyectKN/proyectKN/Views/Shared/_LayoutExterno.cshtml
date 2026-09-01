@@ -1,0 +1,87 @@
+﻿@{
+    var title = ViewData["Title"] as string ?? "Acceso";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@title - Taller La Unión</title>
+
+    <link href="~/css/login.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="layout-externo">
+    <main class="auth-shell">
+        <section class="auth-brand">
+            @if (IsSectionDefined("BrandPanel"))
+            {
+                @await RenderSectionAsync("BrandPanel")
+            }
+            else
+            {
+                <div class="auth-brand__logo">
+                    <img src="~/img/taller-union.png" alt="Taller La Unión" />
+                </div>
+
+                <div class="auth-brand__content">
+                    <p class="auth-brand__eyebrow">Portal interno</p>
+                    <h1>Bienvenido, equipo del Taller La Unión.</h1>
+                    <p>
+                        Este acceso está reservado para el personal autorizado encargado de
+                        administrar citas, vehículos, usuarios y procesos internos del taller.
+                    </p>
+                </div>
+            }
+        </section>
+
+        <section class="auth-panel">
+            <div class="auth-card">
+                <section class="auth-panel">
+    <div class="auth-card">
+
+        @if (TempData["Success"] != null || TempData["Error"] != null)
+        {
+            <div id="mensajeSistema"
+                 class="mensaje-sistema @(TempData["Error"] != null ? "error" : "success")">
+
+                <i class="fa-solid @(TempData["Error"] != null ? "fa-circle-exclamation" : "fa-circle-check")"></i>
+
+                <span>
+                    @(TempData["Error"] ?? TempData["Success"])
+                </span>
+
+            </div>
+        }
+
+        @RenderBody()
+
+        <footer class="login-footer">
+            <p>© 2026 Taller La Unión.</p>
+        </footer>
+
+    </div>
+</section>
+                
+            </div>
+        </section>
+    </main>
+    <script>
+            setTimeout(function () {
+                const mensaje = document.getElementById("mensajeSistema");
+
+                if (mensaje) {
+                    mensaje.style.transition = "opacity .5s ease";
+                    mensaje.style.opacity = "0";
+
+                    setTimeout(() => mensaje.remove(), 500);
+                }
+            }, 3000);
+    </script>
+
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,204 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+    Layout = "_LayoutWeb";
+}
+
+<section class="hero-section">
+    <div class="hero-copy reveal">
+        <p class="eyebrow">Taller automotriz especializado</p>
+        <h1>Servicio confiable para que su vehículo vuelva mejor a la carretera.</h1>
+        <p>
+            Diagnóstico, mantenimiento y reparación con atención clara, seguimiento del estado
+            del vehículo y comunicación directa por WhatsApp.
+        </p>
+
+        <div class="hero-actions">
+            <a class="secondary-action" asp-controller="Web" asp-action="AgendarCita">Agende su cita</a>
+            <a class="secondary-action" asp-controller="Web" asp-action="EstadoVehiculo">Consultar estado</a>
+        </div>
+
+        <div class="hero-stats">
+            <article>
+                <strong>+10</strong>
+                <span>Años de experiencia</span>
+            </article>
+
+            <article>
+                <strong>24h</strong>
+                <span>Respuesta de seguimiento</span>
+            </article>
+
+            <article>
+                <strong>100%</strong>
+                <span>Revisión explicada</span>
+            </article>
+        </div>
+    </div>
+
+    <div class="hero-visual reveal">
+        <div class="image-orbit"></div>
+
+        <img src="~/img/taller.jpg" alt="Taller mecánico profesional" />
+
+        <div class="floating-card card-top">
+            <strong>Diagnóstico</strong>
+            <span>Revisión completa</span>
+        </div>
+
+        <div class="floating-card card-bottom">
+            <strong>Seguimiento</strong>
+            <span>Estado por placa</span>
+        </div>
+    </div>
+</section>
+
+<section id="nosotros" class="content-section about-section reveal">
+    <div class="section-heading">
+        <p class="eyebrow">Quiénes somos</p>
+
+        <h2>Un taller moderno, claro y responsable con cada cliente.</h2>
+
+        <p>
+            En Taller La Unión combinamos experiencia, herramientas adecuadas y comunicación
+            honesta para que usted sepa qué necesita su vehículo antes de aprobar cualquier trabajo.
+        </p>
+    </div>
+
+    <div class="about-grid">
+        <article>
+            <span>01</span>
+            <h3>Diagnóstico claro</h3>
+            <p>Explicamos las fallas encontradas y las opciones de reparación.</p>
+        </article>
+
+        <article>
+            <span>02</span>
+            <h3>Atención directa</h3>
+            <p>Puede contactarnos por WhatsApp para consultas, citas y seguimiento.</p>
+        </article>
+
+        <article>
+            <span>03</span>
+            <h3>Trabajo respaldado</h3>
+            <p>Cuidamos cada detalle para entregar un servicio confiable y ordenado.</p>
+        </article>
+    </div>
+</section>
+
+<section id="servicios" class="content-section services-section reveal">
+    <div class="section-heading">
+        <p class="eyebrow">Servicios</p>
+        <h2>Soluciones automotrices para mantenimiento y reparación.</h2>
+    </div>
+
+    <div class="services-grid">
+        <article>
+            <span class="service-icon">01</span>
+            <h3>Mantenimiento preventivo</h3>
+            <p>Revisión general, ajustes y recomendaciones para evitar fallas mayores.</p>
+        </article>
+
+        <article>
+            <span class="service-icon">02</span>
+            <h3>Cambio de aceite</h3>
+            <p>Reemplazo de aceite y filtros para proteger el motor y mejorar el rendimiento.</p>
+        </article>
+
+        <article>
+            <span class="service-icon">03</span>
+            <h3>Sistema de frenos</h3>
+            <p>Inspección y reparación de componentes de frenado para mayor seguridad.</p>
+        </article>
+
+        <article>
+            <span class="service-icon">04</span>
+            <h3>Alineación y balanceo</h3>
+            <p>Corrección para mejorar la estabilidad, el manejo y el desgaste de llantas.</p>
+        </article>
+
+        <article>
+            <span class="service-icon">05</span>
+            <h3>Servicio eléctrico</h3>
+            <p>Revisión de batería, alternador, luces y componentes eléctricos.</p>
+        </article>
+
+        <article>
+            <span class="service-icon">06</span>
+            <h3>Diagnóstico general</h3>
+            <p>Evaluación mecánica y electrónica para detectar fallas a tiempo.</p>
+        </article>
+    </div>
+</section>
+
+<section id="proceso" class="process-section reveal">
+    <div class="section-heading">
+        <p class="eyebrow">Proceso</p>
+        <h2>Así atendemos su vehículo.</h2>
+    </div>
+
+    <div class="process-line">
+        <article>
+            <span>1</span>
+            <h3>Recepción</h3>
+            <p>Registramos datos, placa y motivo de visita.</p>
+        </article>
+
+        <article>
+            <span>2</span>
+            <h3>Revisión</h3>
+            <p>Realizamos diagnóstico y validamos el estado del vehículo.</p>
+        </article>
+
+        <article>
+            <span>3</span>
+            <h3>Autorización</h3>
+            <p>Le explicamos costos y tiempos antes de iniciar.</p>
+        </article>
+
+        <article>
+            <span>4</span>
+            <h3>Entrega</h3>
+            <p>Entregamos el vehículo con el detalle del trabajo realizado.</p>
+        </article>
+    </div>
+</section>
+
+<section id="ubicacion" class="content-section location-section reveal">
+    <div class="section-heading">
+        <p class="eyebrow">Ubicación</p>
+        <h2>Visítenos o escríbanos para coordinar su revisión.</h2>
+    </div>
+
+    <div class="location-grid">
+        <div class="contact-panel">
+            <span class="panel-label">Taller La Unión</span>
+
+            <h3>San Ramón</h3>
+
+            <p>Costa Rica</p>
+
+            <p>Lunes a Viernes, 8:00 a. m. a 6:00 p. m.</p>
+            <p>Sábado, 8:00 a. m. a 12:00 m.d </p>
+
+            <p>Tel: 4030-1267</p>
+
+            <p>Cel: 6256-1918</p>
+
+            <a class="primary-action"
+               href="https://wa.me/50662561918?text=Hola%2C%20quiero%20cotizar%20el%20arreglo%20de%20mi%20vehiculo"
+                   target="_blank"
+                   rel="noopener">
+                Contactar por WhatsApp
+            </a>
+        </div>
+        <div class="map-frame">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3928.028572433199!2d-84.48033142089844!3d10.096744537353516!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa044fce3211bd3%3A0xe596422536aec6db!2sTaller%20La%20Union!5e0!3m2!1ses!2scr!4v1787264368828!5m2!1ses!2scr"
+                    style="border:0;"
+                    allowfullscreen
+                    loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin">
+            </iframe>
+        </div>
+    </div>
+</section>
+}

@@ -1,0 +1,212 @@
+﻿@model proyectKN.Models.Cita
+
+@{
+    ViewData["Title"] = "Agendar cita";
+    Layout = "_LayoutWeb";
+}
+
+<link href="~/css/agendarcitas.css" rel="stylesheet" / >
+
+<section class="citas-page" >
+
+
+        <div class="citas-info reveal">
+<p class="citas-etiqueta" > Agendar cita</p >
+
+<h1 > Reserve una revisión para su vehículo.</h1 >
+
+<p >
+Complete los datos principales y seleccione el horario disponible para su cita.
+</p >
+
+<div class="citas-beneficios" >
+
+<article >
+<strong > 1</strong >
+<span > Ingrese sus datos</span >
+</article >
+
+<article >
+<strong > 2</strong >
+<span > Seleccione fecha y hora</span >
+</article >
+
+<article >
+<strong > 3</strong >
+<span > Confirmamos su cita</span >
+</article >
+
+</div >
+
+</div >
+
+<section class="citas-card reveal" >
+
+<div class="citas-card-header" >
+
+<span class="citas-pulse" > </span >
+
+<div >
+<p class="citas-etiqueta" > Nueva cita</p >
+<h2 > Datos de la cita</h2 >
+</div >
+ 
+</div >
+
+
+
+<form asp-action="AgendarCita"
+asp-controller="Web"
+method="post"
+class="citas-formulario" >
+<label >
+Cédula
+
+<input asp-for="Cedula"
+id="Cedula"
+placeholder="123456789"
+required
+onkeyup="ConsultarCliente();" / >
+</label >
+
+<label >
+Nombre completo
+
+<input asp-for="NombreCliente"
+id="NombreCliente"
+readonly
+required / >
+</label >
+
+<label >
+Teléfono
+
+<input asp-for="Telefono"
+id="webTelefono"
+maxlength="8"
+required / >
+</label >
+
+<label >
+Correo electrónico
+
+<input asp-for="Email"
+type="email"
+required / >
+</label >
+
+<label >
+Fecha de la cita
+
+<input asp-for="FechaCita"
+id="FechaCitaWeb"
+type="date"
+min="@DateTime.Now.ToString("yyyy-MM-dd")"
+onchange="cargarHorasOcupadasWeb()"
+required / >
+</label >
+
+<div class="campo-completo" >
+
+<div class="citas-horarios" >
+
+<h3 > Seleccione una hora</h3 >
+<div id="mensajeEstado" class="mensaje-estado" style="display:none;" >
+<span class="icono-estado" > </span >
+<div >
+<strong id="tituloEstado" > </strong >
+<p id="textoEstado" > </p >
+</div >
+</div >
+<div class="horarios-grid" >
+
+<button type="button"
+class="btn-hora"
+data-hora="08:00"
+onclick="seleccionarHoraWeb('08:00', this)" >
+8:00 AM
+</button >
+
+<button type="button"
+class="btn-hora"
+data-hora="09:00"
+onclick="seleccionarHoraWeb('09:00', this)" >
+9:00 AM
+</button >
+
+<button type="button"
+class="btn-hora"
+data-hora="10:00"
+onclick="seleccionarHoraWeb('10:00', this)" >
+10:00 AM
+</button >
+
+<button type="button"
+class="btn-hora"
+data-hora="11:00"
+onclick="seleccionarHoraWeb('11:00', this)" >
+11:00 AM
+</button >
+
+<button type="button"
+class="btn-hora"
+data-hora="13:00"
+onclick="seleccionarHoraWeb('13:00', this)" >
+1:00 PM
+</button >
+
+<button type="button"
+class="btn-hora"
+data-hora="14:00"
+onclick="seleccionarHoraWeb('14:00', this)" >
+2:00 PM
+</button >
+
+<button type="button"
+class="btn-hora"
+data-hora="15:00"
+onclick="seleccionarHoraWeb('15:00', this)" >
+3:00 PM
+</button >
+
+<button type="button"
+class="btn-hora"
+data-hora="16:00"
+onclick="seleccionarHoraWeb('16:00', this)" >
+4:00 PM
+</button >
+
+</div >
+<div id="mensajeHora" class="mensaje-validacion" > </div >
+</div >
+
+</div >
+
+<input type="hidden"
+asp-for="HoraCita"
+id="HoraCitaWeb" / >
+
+<label class="campo-completo" >
+
+Servicio requerido
+
+<textarea asp-for="Servicio"
+rows="3"
+required >
+</textarea >
+
+</label >
+
+<button type="submit" >
+Solicitar cita
+</button >
+
+</form >
+
+</section >
+
+</section >
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js" > </script >
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" > </script >
+<script src="~/js/webcita.js" > </script >

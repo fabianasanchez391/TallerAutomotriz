@@ -1,0 +1,366 @@
+﻿@model proyectKN.Models.Inventario
+@using System.Globalization
+@{
+    ViewData["Title"] = "Registro de Inventario";
+    Layout = "_Layout";
+}
+
+<link href="~/css/inventario.css" rel="stylesheet" />
+
+<div class="inventario-container">
+
+
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert alert-danger text-center text-danger">
+            @ViewBag.Mensaje
+        </div>
+    }
+    <!-- Header -->
+
+    <div class="inventario-header">
+        <div>
+            <h1>Inventario</h1>
+            <p>Gestión de productos registrados en el taller</p>
+        </div>
+
+        <button type="button"
+                class="btn-nuevo-inventario"
+                onclick="document.getElementById('ventanaRegistroInventario').style.display='flex'">
+            <i class="fa-solid fa-boxes-stacked"></i>
+            Nuevo Producto
+        </button>
+    </div>
+
+    <div class="busqueda-card">
+        <div class="busqueda-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text"
+                   id="buscarInventario"
+                   placeholder="Buscar producto...">
+        </div>
+    </div>
+
+    <div id="ventanaRegistroInventario" class="modal-inventario">
+        <div class="modal-contenido modal-inventario-contenido">
+
+            <div class="modal-header-inventario">
+                <h2>Registro de Inventario</h2>
+            </div>
+        
+            <!-- FORMULARIO -->
+
+
+            <form asp-action="RegistroInventario"
+                  method="post"
+                  id="formRegistro"
+                  class="form-inventario"
+                  onsubmit="return validarInventario();">
+                <div>
+                    <label>Nombre</label>
+                    <input type="text" asp-for="Nombre" placeholder="Aceite de motor" required>
+                    </div>
+
+                    <div>
+                        <label>Código del Artículo</label>
+                        <input type="text"
+                               asp-for="IdArticulo"
+                               value="@ViewBag.Codigo"
+                               readonly>
+                    </div>
+
+                        <div>
+                            <label>Descripción</label>
+                            <input type="text" asp-for="Descripcion" placeholder="Aceite de motor W45" required>
+                            </div>
+
+                            <div>
+                                <label>Precio Compra</label>
+                                <input type="number" asp-for="PrecioCompra" placeholder="₡25.000" required>
+                                </div>
+
+                                <div>
+                                    <label>Precio Venta</label>
+                                    <input type="number" asp-for="PrecioVenta" placeholder="₡45.000" required>
+                                    </div>
+
+                                    <div>
+                                        <label>Stock</label>
+                                        <input type="number" id="Stock" asp-for="Stock" placeholder="10" required>
+                                        </div>
+
+                                        <div>
+                                            <label>Stock Mínimo</label>
+                                            <input type="number" id="StockMinimo" asp-for="StockMinimo" placeholder="6" required>
+                                            </div>
+
+                                            <div>
+                                                <label>Proveedor</label> 
+                                                <select asp-for="Proveedor" required>
+                                                    <option value="">Seleccione un Proveedor</option>
+                                                    @if (ViewBag.Proveedor != null) 
+                                                    {
+                                                        foreach (var p in ViewBag.Proveedor) {
+                                                <option value="@p.Consecutivo">@p.Nombre </option>
+                                            }
+                                        }
+                                    </select> 
+                                    </div>
+
+        
+                                            <div class="form-botones">
+                                                <button type="submit" class="btn-guardar">Guardar</button>
+
+                                                <button type="button"
+                                                        class="btn-cancelar"
+                                                        onclick="limpiarFormularioInventario()">
+                                                    Cancelar
+                                                </button>
+                                            </div>
+
+                                        </form>
+
+                                    </div>
+                                </div>
+                                @if (ViewBag.Inventario != null)
+                                {
+                                    var productosBajos = ((List<InventarioConsulta>)ViewBag.Inventario)
+                                        .Where(x => x.Stock <= x.StockMinimo)
+                                        .ToList();
+
+                                    if (productosBajos.Any())
+                                    {
+                                        <div class="alert alert-warning alerta-stock">
+                                            <strong>⚠ Alerta de inventario:</strong>
+                                            Los siguientes productos tienen stock bajo:
+                                            <br />
+                                            @foreach (var p in productosBajos)
+                                            {
+                                                <strong>@p.Nombre</strong>
+
+                                                if (p != productosBajos.Last())
+                                                {
+                                                    <text>, </text>
+                                                }
+                                            }
+
+                                        </div>
+                                    }
+                                }
+
+                                <!-- TABLA -->
+
+                                <div class="tabla-card">
+                                    <div id="ventanaEditarInventario" class="modal-inventario">
+                                        <div class="modal-contenido">
+
+                                            <div class="modal-header-inventario">
+                                                <h2>Editar Inventario</h2>
+                                            </div>
+
+                                            <form asp-action="EditarInventario"
+                                                  method="post"
+                                                  class="form-inventario">
+
+                                                <input type="hidden"
+                                                       asp-for="Consecutivo"
+                                                       id="editConsecutivo" />
+
+                                                <div>
+                                                    <label>Nombre del Artículo</label>
+
+                                                    <input type="text"
+                                                           asp-for="Nombre"
+                                                           id="editNombre"
+                                                           readonly
+                                                           required />
+                                                </div>
+
+                                                <div>
+                                                    <label>Código Artículo</label>
+
+                                                    <input type="text"
+                                                           asp-for="IdArticulo"
+                                                           id="editCodigo"
+                                                           readonly
+                                                           required />
+                                                </div>
+
+                                                <div>
+                                                    <label>Descripción</label>
+
+                                                    <input type="text"
+                                                           asp-for="Descripcion"
+                                                           id="editDescripcion"
+                                                           readonly
+                                                           required />
+                                                </div>
+
+                                                <div>
+                                                    <label>Precio Compra</label>
+
+                                                    <input type="number"
+                                                           asp-for="PrecioCompra"
+                                                           id="editCompra"
+                                                           required />
+                                                </div>
+
+                                                <div>
+                                                    <label>Precio Venta</label>
+
+                                                    <input type="number"
+                                                           asp-for="PrecioVenta"
+                                                           id="editVenta"
+                                                           required />
+                                                </div>
+
+                                                <div>
+                                                    <label>Stock</label>
+
+                                                    <input type="number"
+                                                           asp-for="Stock"
+                                                           id="editStock"
+                                                           required />
+                                                </div>
+
+                                                <div>
+                                                    <label>Stock Mínimo</label>
+
+                                                    <input type="number"
+                                                           asp-for="StockMinimo"
+                                                           id="editMinimo"
+                                                           required />
+                                                </div>
+
+                                                <div>
+                                                <label>Proveedor</label>
+
+                                                <select asp-for="Proveedor" id="editProveedor" class="form-control" required>
+                                                    @if (ViewBag.Proveedor != null)
+                                                    {
+                                                        foreach (var p in ViewBag.Proveedor)
+                                                        {
+                                                            <option value="@p.Consecutivo">@p.Nombre</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+
+                                                <div class="form-botones">
+                                                    <button type="submit" class="btn-guardar">
+                                                        Guardar
+                                                    </button>
+
+                                                    <button type="button"
+                                                            class="btn-cancelar"
+                                                            onclick="document.getElementById('ventanaEditarInventario').style.display='none'">
+
+                                                        Cancelar
+
+                                                    </button>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+ 
+                                    <table id="tablaInventario" class="tabla-paginada">
+                                       
+
+                                        <thead>
+                                            <tr>
+                                                <th>Artículo</th>
+                                                <th>Código</th>
+                                                <th>Descripción</th>
+                                                <th>Precio Compra</th>
+                                                <th>Precio Venta</th>
+                                                <th>Stock Actual</th>
+                                                <th>Stock Mínimo</th>
+                                                <th>Proveedor</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                           
+                                            <tr id="sinResultadosInventario" hidden>
+                                                <td colspan="5" class="sin-resultados-tabla">
+                                                    No se encontraron resultados
+                                                </td>
+                                            </tr>
+                                            @if (ViewBag.Inventario != null && ViewBag.Inventario.Count > 0)
+                                            {
+                                                foreach (var item in ViewBag.Inventario)
+                                                {
+                                                    <tr class="@(item.Stock <= item.StockMinimo ? "fila-stock-bajo" : "")">
+
+                                                        <td>
+                                                            <div class="producto-info">
+                                                                <div>
+                                                                    <strong>@item.Nombre</strong>
+                                                                   
+                                                                </div>
+
+                                                            </div>
+                                                        </td>
+
+                                                        <td>@item.IdArticulo</td>
+
+                                                        <td>@item.Descripcion</td>
+
+                            <td>@item.PrecioCompra.ToString("C", new CultureInfo("es-CR"))</td>
+
+                            <td>@item.PrecioVenta.ToString("C", new CultureInfo("es-CR"))</td>
+
+                                                        <td>
+                                                            <span class="badge @(item.Stock <= item.StockMinimo ? "cancelada" : "confirmada")">
+                                                                @item.Stock
+                                                            </span>
+                                                        </td>
+
+                                                        <td>@item.StockMinimo</td>
+
+                                                        <td>@item.Proveedor</td>
+
+                                                        <td class="acciones">
+
+                                                            <button type="button"
+                                                                    class="icon editar"
+                                                                    onclick="abrirEditarInventario(
+                                                                '@item.Consecutivo',
+                                                                '@item.Nombre',
+                                                                '@item.IdArticulo ',
+                                                                '@item.Descripcion',
+                                                                '@item.PrecioCompra.ToString(System.Globalization.CultureInfo.InvariantCulture)',
+                                                                '@item.PrecioVenta.ToString(System.Globalization.CultureInfo.InvariantCulture)',
+                                                                '@item.Stock',
+                                                                '@item.StockMinimo',
+                                                                '@item.Proveedor'
+                                                                )">
+                                                                <i class="fa-solid fa-pen"></i>
+                                                            </button>
+
+                                                        </td>
+
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td colspan="9" class="text-center text-muted">
+                                                        No hay inventarios registrados
+                                                    </td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+
+                                    </table>
+
+                                    <div class="paginacion"></div>
+                                </div>
+                            </div>
+
+                            <script src="~/js/inventario.js"></script>
+                            <script src="~/js/paginacion.js"></script>

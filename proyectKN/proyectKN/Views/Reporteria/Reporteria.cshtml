@@ -1,0 +1,200 @@
+﻿@model proyectKN.Models.Reporte
+
+@{
+    ViewData["Title"] = "Reportería";
+    Layout = "_Layout";
+}
+
+<link href="~/css/reporte.css" rel="stylesheet" />
+
+<div class="reporteria-container reporteria-loading">
+    <div class="reporteria-header">
+        <div>
+            <h1> Reportería</h1>
+            <p> Generación y análisis de reportes por módulo del sistema</p>
+        </div>
+
+
+        <div class="reporteria-filtros">
+            <div class="filtro-grupo">
+                <label> Desde</label>
+                <input id="desde" type="date"
+                       onchange="validarRangoFechas()" />
+            </div>
+
+            <div class="filtro-grupo">
+                <label> Hasta</label>
+                <input id="hasta" type="date"
+                       onchange="validarRangoFechas()" />
+            </div>
+        </div>
+    </div>
+
+    <section class="resumen-grid">
+
+        <div class="resumen-card">
+            <div class="resumen-icon ingresos"> <i class="fa-solid fa-coins"> </i> </div>
+            <div>
+                <span> Ingresos</span>
+                <strong id="totalIngresos"> ₡0</strong>
+            </div>
+        </div>
+
+
+        <div class="resumen-card">
+            <div class="resumen-icon egresos">
+                <i class="fa-solid fa-money-bill-transfer"> </i>
+            </div>
+            <div>
+                <span> Egresos</span>
+                <strong id="totalEgresos"> ₡0</strong>
+            </div>
+        </div>
+
+        <div class="resumen-card">
+            <div class="resumen-icon citas">
+                <i class="fa-solid fa-calendar-check"> </i>
+            </div>
+            <div>
+                <span> Citas</span>
+                <strong id="totalCitas"> 0</strong>
+            </div>
+        </div>
+
+        <div class="resumen-card">
+            <div class="resumen-icon vehiculos">
+                <i class="fa-solid fa-car"> </i>
+            </div>
+            <div>
+                <span> Vehículos</span>
+                <strong id="totalVehiculos"> 0</strong>
+            </div>
+        </div>
+    </section>
+
+    <section class="reportes-layout">
+        <div class="modulos-panel">
+            <div class="section-title">
+                <h2> Reportes disponibles</h2>
+                <p> Seleccione un módulo para generar la información</p>
+            </div>
+
+            <div class="modulos-grid">
+
+                <button type="button"
+                        class="modulo-card active"
+                        data-modulo="contabilidad"
+                        onclick="preset('contabilidad')">
+                    <i class="fa-solid fa-file-invoice-dollar"> </i>
+                    <span> Contabilidad</span>
+                    <small> Ingresos y egresos</small>
+                </button>
+
+                <button type="button"
+                        class="modulo-card"
+                        data-modulo="clientes"
+                        onclick="preset('clientes')">
+                    <i class="fa-solid fa-users"> </i>
+                    <span> Usuarios</span>
+                    <small> Listado de usuarios</small>
+                </button>
+
+                <button type="button"
+                        class="modulo-card"
+                        data-modulo="citas"
+                        onclick="preset('citas')">
+                    <i class="fa-solid fa-calendar-days"> </i>
+                    <span> Citas</span>
+                    <small> Estados de citas</small>
+                </button>
+
+                <button type="button"
+                        class="modulo-card"
+                        data-modulo="ingresos_vehiculos"
+                        onclick="preset('ingresos_vehiculos')">
+                    <i class="fa-solid fa-car-side"> </i>
+                    <span> Ingreso vehículos</span>
+                    <small> Registro de ingresos</small>
+                </button>
+
+                <button type="button"
+                        class="modulo-card"
+                        data-modulo="inventario"
+                        onclick="preset('inventario')">
+                    <i class="fa-solid fa-warehouse"> </i>
+                    <span> Inventario</span>
+                    <small> Stock y productos</small>
+                </button>
+
+                <button type="button"
+                        class="modulo-card"
+                        data-modulo="proveedores"
+                        onclick="preset('proveedores')">
+                    <i class="fa-solid fa-truck-field"> </i>
+                    <span> Proveedores</span>
+                    <small> Registro de proveedores</small>
+                </button>
+
+            </div>
+        </div>
+
+        <div class="graficos-panel">
+            <div class="grafico-card grafico-lineas">
+                <h3 id="graficoTitulo"> Tendencia mensual</h3>
+                <canvas id="graficoMensual"> </canvas>
+            </div>
+        </div>
+    </section>
+
+    <section class="filtros-resumen">
+
+        <div class="section-title">
+            <h2 id="filtroTitulo"></h2>
+            <p id="filtroDescripcion"></p>
+        </div>
+
+        <div id="filtrosCards" class="filtros-cards">
+        </div>
+
+    </section>
+
+    <section class="tabla-reporte-card">
+        <div class="tabla-header">
+            <div>
+                <h2 id="reportTitle"></h2>
+                <p id="reportDescription"></p>
+            </div>
+
+            <div class="export-buttons">
+                <button type="button" class="btn-export excel" onclick="exportTable()">
+                    <i class="fa-solid fa-file-excel"> </i>
+                    CSV
+                </button>
+
+                <button type="button" class="btn-export pdf" onclick="exportPDF()">
+                    <i class="fa-solid fa-file-pdf"> </i>
+                    PDF
+                </button>
+            </div>
+        </div>
+
+        <div class="table-wrap">
+            <table id="reportTable" class="tabla-paginada">
+                <thead id="reportHead"></thead>
+                <tbody id="reportBody"></tbody>
+            </table>
+            <div class="paginacion"> </div>
+        </div>
+
+    </section>
+</div>
+
+<script src="~/js/paginacion.js"> </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"> </script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"> </script>
+<script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"> </script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"> </script>
+<script src="~/js/reporte.js" asp-append-version="true"> </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"> </script>

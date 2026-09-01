@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+}
+
+<link href="~/css/card.css" rel="stylesheet" />
+
+<div class="card">
+
+    <div class="card-header">
+        <h2>Citas del mes</h2>
+    </div>
+
+    <div class="table-container">
+        <table id="tablaindex" class="table tabla-paginada">
+            <thead>
+                <tr>
+               
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Servicio</th>
+                <th>Contacto</th>
+                <th>Estado de la Cita</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (ViewBag.CitasHoy != null && ViewBag.CitasHoy.Count > 0)
+            {
+                foreach (var item in ViewBag.CitasHoy)
+                {
+                        string claseEstado = "ingresado";
+
+                        if (item.Estado == "Confirmada")
+                            claseEstado = "revisado";
+                        else if (item.Estado == "Finalizada")
+                            claseEstado = "revisado";
+                        else if (item.Estado == "Cancelada")
+                            claseEstado = "reparado";
+                        else if (item.Estado == "Pendiente")
+                            claseEstado = "ingresado";
+
+                    <tr>
+                        
+                        <td>@item.NombreCliente</td>
+                        <td>
+                            @item.FechaCita.ToString("dd/MM/yyyy")
+                            <br />
+                            @item.HoraCita.ToString(@"hh\:mm")
+                        </td>
+                        <td>@item.Servicio</td>
+                        <td>
+                            @item.Email
+                            <br />
+                            @item.Telefono
+                        </td>
+                        <td>
+                            <span class="badge @claseEstado">@item.Estado</span>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center text-muted">
+                        No hay citas para hoy
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+        <div class="paginacion"></div>
+</div>
+</div>
+<script src="~/js/paginacion.js"></script>

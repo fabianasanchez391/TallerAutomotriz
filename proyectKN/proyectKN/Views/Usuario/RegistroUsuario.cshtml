@@ -1,0 +1,293 @@
+﻿@model proyectKN.Models.Usuario
+
+@{
+    ViewData["Title"] = "Registro de Usuarios";
+    Layout = "_Layout";
+}
+
+<link href="~/css/usuario.css" rel="stylesheet" />
+
+<div class="usuarios-container">
+
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert alert-danger text-center">
+            @ViewBag.Mensaje
+        </div>
+    }
+
+    <div class="usuarios-header">
+        <div>
+            <h1>Usuarios</h1>
+            <p>Gestión de usuarios del sistema</p>
+        </div>
+
+        <button type="button"
+                class="btn-nuevo-usuario"
+                onclick="document.getElementById('ventanaRegistroUsuario').style.display='flex'">
+            <i class="fa-solid fa-user-plus"></i>
+            Nuevo Usuario
+        </button>
+    </div>
+    <div class="busqueda-card">
+        <div class="busqueda-box">
+            <i class="fa-solid fa-magnifying-glass"> </i>
+            <input type="text"
+                   id="buscarUsuario"
+                   placeholder="Buscar Usuario...">
+        </div>
+    </div>
+
+    <div id="ventanaRegistroUsuario" class="modal-usuario">
+        <div class="modal-contenido-usuario">
+            <h2>Nuevo Usuario</h2>
+
+            <form asp-action="RegistroUsuario"
+                  method="post"
+                  id="formRegistro"
+                  class="form-usuario"
+                onsubmit="return validarFormulario();">
+
+                <div>
+                    <label>Número de Cédula</label>
+                    <input type="text"
+                           asp-for="Cedula"
+                           placeholder="118784526"
+                           required
+                           onkeyup="ConsultarNombre();" />
+                </div>
+
+                <div>
+                    <label>Nombre Completo</label>
+                    <input type="text"
+                           asp-for="NombreCompleto"
+                           placeholder=" Juan Carlos"
+                           readonly
+                           required />
+                    <span id="errorNombre" class="text-danger"></span>
+                </div>
+
+                <div>
+                    <label>Correo</label>
+                    <input type="email"
+                           asp-for="Correo"
+                           placeholder="correo@gmail.com"
+                           required />
+                </div>
+
+                <div>
+                    <label>Usuario</label>
+                    <input type="text"
+                           asp-for="UsuarioLogin"
+                           placeholder="Nombre de usuario"
+                           required />
+                </div>
+
+                <div>
+                    <label>Contraseña</label>
+                    <input type="password"
+                           id="Contrasenna"
+                           asp-for="Contrasenna"
+                           placeholder="********"
+                           minlength="6"
+                           required />
+                </div>
+
+                <div>
+                    <label>Rol</label>
+                    <select asp-for="NombreRol" required>
+                        <option value="">Seleccione</option>
+
+                        @if (ViewBag.Roles != null)
+                        {
+                            foreach (var r in ViewBag.Roles)
+                            {
+                                <option value="@r.Consecutivo">@r.NombreRol</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div>
+                    <label>Estado</label>
+                    <input type="text" value="Activo" readonly />
+                </div>
+
+                <div class="form-botones-usuario">
+                    <button type="submit" class="btn-guardar">
+                        Guardar
+                    </button>
+
+                    <button type="button"
+                            class="btn-cancelar"
+                            onclick="limpiarFormularioUsuario()">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="tabla-card">
+        <div id="ventanaEditarUsuario" class="modal-usuario">
+            <div class="modal-contenido-usuario">
+                <h2>Editar Usuario</h2>
+
+                <form asp-action="EditarUsuario" method="post" class="form-usuario">
+
+                    <input type="hidden" asp-for="Consecutivo" id="editConsecutivo" />
+
+                    <div>
+                        <label>Cédula</label>
+                        <input type="text" asp-for="Cedula" id="editCedula" readonly required />
+                    </div>
+
+                    <div>
+                        <label>Nombre Completo</label>
+                        <input type="text" asp-for="NombreCompleto" id="editNombre" readonly required />
+                    </div>
+
+                    <div>
+                        <label>Correo</label>
+                        <input type="email" asp-for="Correo" id="editCorreo" required />
+                    </div>
+
+                    <div>
+                        <label>Usuario</label>
+                        <input type="text" asp-for="UsuarioLogin" id="editUsuario" required />
+                    </div>
+
+                    <div>
+                        <label>Contraseña</label>
+                        <input type="password" asp-for="Contrasenna" id="editContrasenna" placeholder="Nueva contraseña (opcional)" />
+                    </div>
+
+                    <div>
+                        <label>Rol</label>
+                        <select asp-for="NombreRol" id="editRol" required>
+                            @if (ViewBag.Roles != null)
+                            {
+                                foreach (var r in ViewBag.Roles)
+                                {
+                                    <option value="@r.Consecutivo">@r.NombreRol</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                 
+
+                    <div class="form-botones-usuario">
+                        <button type="submit" class="btn-guardar">
+                            Guardar
+                        </button>
+
+                        <button type="button"
+                                class="btn-cancelar"
+                                onclick="document.getElementById('ventanaEditarUsuario').style.display='none'">
+                            Cancelar
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+       
+        <div class="table-container">
+            <table id="tablaUsuario" class=" table tabla-paginada">
+
+            <thead>
+                <tr>
+                    <th>Cuenta</th>
+                    <th>Cédula</th>
+                    <th>Usuario</th>
+                    <th>Rol</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                    <tr id="sinResultadosUsuario" hidden>
+                        <td colspan="6" class="sin-resultados-tabla">
+                            No se encontraron resultados
+                        </td>
+                    </tr>
+
+                @if (ViewBag.Usuarios != null && ViewBag.Usuarios.Count > 0)
+                {
+                    foreach (var item in ViewBag.Usuarios)
+                    {
+                        var iniciales = "US";
+
+                        if (!string.IsNullOrEmpty(item.NombreCompleto))
+                        {
+                            var partes = item.NombreCompleto.Split(' ');
+                            iniciales = partes.Length >= 2
+                                ? partes[0].Substring(0, 1).ToUpper() + partes[1].Substring(0, 1).ToUpper()
+                                : item.NombreCompleto.Substring(0, 1).ToUpper();
+                        }
+
+                        <tr>
+                            <td>
+                                <div class="user-info">
+                                    <div class="avatar">@iniciales</div>
+                                    <div>
+                                        <strong>@item.NombreCompleto</strong>
+                                        <span>@item.Correo</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>@item.Cedula</td>
+                            <td>@item.UsuarioLogin</td>
+                            <td>
+                                <span class="badge rol">@item.NombreRol</span>
+                            </td>
+                            <td>
+                                <span class="badge @(item.Estado == "Activo" ? "activo" : "inactivo")">
+                                    @item.Estado
+                                </span>
+                            </td>
+                            <td class="acciones">
+                                <button type="button"
+                                        class="icon editar"
+                                        onclick="abrirEditarUsuario(
+                                    '@item.Consecutivo',
+                                    '@item.Cedula',
+                                    '@item.NombreCompleto',
+                                    '@item.Correo',
+                                    '@item.UsuarioLogin',
+                                    '@item.NombreRol',
+                                    '@item.Estado'
+                                    )">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+
+                                <button type="button"
+                                        class="switch-estado @(item.Estado == "Activo" ? "activo" : "inactivo")"
+                                        onclick="cambiarEstadoUsuario(this,@item.Consecutivo)">
+                                    <span></span>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">
+                            No hay usuarios registrados
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>     
+            <div class="paginacion"></div>
+    </div>
+</div>
+</div>
+<script src="~/js/paginacion.js"></script>
+<script src="~/js/registro.js"></script>
+ 
+                   

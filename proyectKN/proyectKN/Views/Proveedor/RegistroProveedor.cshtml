@@ -1,0 +1,277 @@
+﻿@model proyectKN.Models.Proveedor
+
+@{
+    ViewData["Title"] = "Registro de Proveedores";
+    Layout = "_Layout";
+}
+
+<link href="~/css/proveedor.css" rel="stylesheet" / >
+
+<div class="proveedores-container" >
+
+
+
+    <!-- HEADER -->
+    <div class="proveedores-header">
+
+        <div>
+            <h1>Proveedores</h1>
+            <p>Gestión de proveedores registrados en el sistema</p>
+        </div>
+
+        <button type="button"
+                class="btn-nuevo-proveedor"
+                onclick="document.getElementById('ventanaRegistroProveedor').style.display='flex'">
+
+            <i class="fa-solid fa-truck"></i>
+            Nuevo Proveedor
+
+        </button>
+    </div>
+
+    <div class="busqueda-card">
+        <div class="busqueda-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text"
+                   id="buscarProveedor"
+                   placeholder="Buscar producto...">
+        </div>
+     
+    </div>
+
+    <!-- MODAL -->
+    <div id="ventanaRegistroProveedor" class="modal-proveedor">
+
+        <div class="modal-contenido-proveedor">
+
+            <h2>Nuevo Proveedor</h2>
+
+            <form asp-action="RegistroProveedor"
+                  method="post"
+                  id="formRegistro"
+                  class="form-proveedor">
+
+                <div>
+                    <label>Nombre del Proveedor</label>
+
+                    <input type="text"
+                           asp-for="Nombre"
+                           placeholder="Proveedor XYZ"
+                           required>
+                    </div>
+
+                    <div>
+                        <label>Teléfono</label>
+
+                        <input type="text"
+                               asp-for="Telefono"
+                               placeholder="88888888"
+                               maxlength="8"
+                               required>
+                        </div>
+
+                        <div>
+                            <label>Correo</label>
+
+                            <input type="email"
+                                   asp-for="Correo"
+                                   placeholder="proveedor@gmail.com"
+                                   required>
+                            </div>
+
+                            <div>
+                                <label>Dirección</label>
+
+                                <input type="text"
+                                       asp-for="Direccion"
+                                       placeholder="San José, Costa Rica"
+                                       required>
+                                </div>
+                                <div>
+                                    <label>Estado</label>
+                                    <input type="text" value="Activo" readonly />
+                                </div>
+
+                                <div class="form-botones-proveedor">
+                                    <button type="submit" class="btn-guardar">
+                                        Guardar
+                                    </button>
+
+                                    <button type="button"
+                                            class="btn-cancelar"
+                                            onclick="document.getElementById('ventanaRegistroProveedor').style.display='none'">
+                                        Cancelar
+                                    </button>
+                                </div>
+                              
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                    <!-- TABLA -->
+                    <div class="tabla-card">
+                        <div id="ventanaEditarProveedor" class="modal-proveedor">
+                            <div class="modal-contenido-proveedor">
+                                <div class="modal-header-proveedor">
+                                    <h2>Editar Proveedor</h2>
+                                </div>
+
+                                <form asp-action="EditarProveedor"
+                                      method="post"
+                                      class="form-proveedor">
+
+                                    <input type="hidden"
+                                           asp-for="Consecutivo"
+                                           id="editConsecutivo" />
+
+                                    <div>
+                                        <label>Nombre</label>
+                                        <input type="text"
+                                               asp-for="Nombre"
+                                               id="editNombre"
+                                               readonly
+                                               required />
+                                    </div>
+
+                                    <div>
+                                        <label>Teléfono</label>
+                                        <input type="text"
+                                               asp-for="Telefono"
+                                               id="editTelefono"
+                                               maxlength="8"
+                                               required />
+                                    </div>
+
+                                    <div>
+                                        <label>Correo</label>
+                                        <input type="email"
+                                               asp-for="Correo"
+                                               id="editCorreo"
+                                               required />
+                                    </div>
+
+                                    <div>
+                                        <label>Dirección</label>
+                                        <input type="text"
+                                               asp-for="Direccion"
+                                               id="editDireccion"
+                                               required />
+                                    </div>
+
+                                    
+                                    <div class="form-botones-proveedor">
+                                        <button type="submit" class="btn-guardar">
+                                            Guardar
+                                        </button>
+
+                                        <button type="button"
+                                                class="btn-cancelar"
+                                                onclick="document.getElementById('ventanaEditarProveedor').style.display='none'">
+                                            Cancelar
+                                        </button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        <table id="tablaProveedor" class="tabla-paginada">
+                            
+
+                            <thead>
+                                <tr>
+                                    <th>Proveedor</th>
+                                    <th>Teléfono</th>
+                                    <th>Correo</th>
+                                    <th>Dirección</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr id="sinResultadosProveedor" hidden>
+                                    <td colspan="6" class="sin-resultados-tabla">
+                                        No se encontraron resultados
+                                    </td>
+                                </tr>
+
+                                @if (ViewBag.Proveedores != null && ViewBag.Proveedores.Count > 0)
+                                {
+                                    foreach (var item in ViewBag.Proveedores)
+                                    {
+                                        <tr>
+
+                                            <td>
+                                                <div class="proveedor-info">
+
+                                                    <div class="avatar-proveedor">
+                                                        @item.Nombre.Substring(0,1).ToUpper()
+                                                    </div>
+
+                                                    <div>
+                                                        <strong>@item.Nombre</strong>
+                                                        <span>@item.Correo</span>
+                                                    </div>
+
+                                                </div>
+                                            </td>
+
+                                            <td>@item.Telefono</td>
+
+                                            <td>@item.Correo</td>
+
+                                            <td>@item.Direccion</td>
+
+                                         <td>
+                                                <span class="badge @(item.Estado?.Trim().ToLower() == "activo" ? "activo" : "inactivo")">
+                                                    @item.Estado
+                                                </span>
+                                                </td>
+                                                
+                                                <td class="acciones">
+                                                <button type="button"
+                                                        class="icon editar"
+                                                        onclick="abrirEditarProveedor(
+                                                    '@item.Consecutivo',
+                                                    '@item.Nombre',
+                                                    '@item.Telefono',
+                                                    '@item.Correo',
+                                                    '@item.Direccion',
+                                                    '@item.Estado'
+                                                              
+                                                    )">
+                                                    <i class="fa-solid fa-pen"></i>
+                                                </button>
+
+                                                <button type="button"
+                                                        class="switch-estado @(item.Estado?.Trim().ToLower() == "activo" ? "activo" : "inactivo")"
+                                                        onclick="cambiarEstadoProveedor(this,@item.Consecutivo)">
+                                                    <span></span>
+                                                </button>
+
+                                            </td>
+
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="5" class="text-center text-muted">
+                                            No hay proveedores registrados
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table>
+
+                        <div class="paginacion"></div>
+
+                </div>
+                </div>
+                <script src="~/js/paginacion.js"></script>
+                <script src="~/js/proveedor.js"></script>

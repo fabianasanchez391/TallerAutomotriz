@@ -1,0 +1,423 @@
+﻿/* ==========================================
+   PAGINA CITAS
+========================================== */
+
+.citas-page {
+    display: grid;
+    grid-template-columns: minmax(0,.82fr) minmax(420px,.95fr);
+    gap: clamp(30px,6vw,80px);
+    align-items: start;
+    width: min(1180px, calc(100% - 36px));
+    margin: 0 auto;
+    padding: 70px 0;
+    font-family: Arial, sans-serif;
+}
+
+
+/* ==========================================
+   INFORMACION
+========================================== */
+
+.citas-info {
+    position: relative;
+}
+
+.citas-info h1 {
+    max-width: 650px;
+    margin: 0;
+    color: #071a36;
+    font-size: clamp(40px,5vw,64px);
+    line-height: 1.05;
+    font-weight: 500;
+}
+
+.citas-info p:not(.citas-etiqueta) {
+    max-width: 620px;
+    margin: 22px 0;
+    color: #5d6b7c;
+    font-size: 18px;
+    line-height: 1.7;
+    font-weight: 400;
+}
+
+
+/* ==========================================
+   ETIQUETA
+========================================== */
+
+.citas-etiqueta {
+    margin: 0 0 14px;
+    color: #0b66d8;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+
+/* ==========================================
+   BENEFICIOS
+========================================== */
+
+.citas-beneficios {
+    display: grid;
+    gap: 14px;
+    max-width: 520px;
+    margin-top: 30px;
+}
+
+.citas-beneficios article {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    border: 1px solid #dbe7f5;
+    border-radius: 18px;
+    background: rgba(255,255,255,.92);
+    box-shadow: 0 12px 28px rgba(15,23,42,.05);
+    transition: .25s ease;
+}
+
+.citas-beneficios article:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 34px rgba(11,102,216,.10);
+}
+
+.citas-beneficios strong {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: #d9eaff;
+    color: #0b66d8;
+    font-weight: 500;
+}
+
+.citas-beneficios span {
+    color: #071a36;
+    font-weight: 400;
+}
+
+
+/* ==========================================
+   TARJETA
+========================================== */
+
+.citas-card {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 36px;
+    border: 1px solid #dbe7f5;
+    border-radius: 24px;
+    background: rgba(255,255,255,.96);
+    box-shadow: 0 24px 60px rgba(11,102,216,.14);
+}
+
+.citas-card::before {
+    content: "";
+    position: absolute;
+    top: -90px;
+    right: -90px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        rgba(11,102,216,.14),
+        rgba(16,183,232,.20)
+    );
+}
+
+.citas-card-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.citas-card-header h2 {
+    margin: 0;
+    color: #071a36;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+
+/* ==========================================
+   PUNTO ANIMADO
+========================================== */
+
+.citas-pulse {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #10b7e8;
+    box-shadow: 0 0 0 rgba(16,183,232,.5);
+    animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+
+    0% {
+        box-shadow: 0 0 0 0 rgba(16,183,232,.5);
+    }
+
+    70% {
+        box-shadow: 0 0 0 16px rgba(16,183,232,0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(16,183,232,0);
+    }
+}
+
+
+/* ==========================================
+   FORMULARIO
+========================================== */
+
+.citas-formulario {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 18px;
+}
+
+.citas-formulario label {
+    display: grid;
+    gap: 8px;
+    color: #071a36;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.citas-formulario input,
+.citas-formulario textarea,
+.citas-formulario select {
+    width: 100%;
+    min-height: 58px;
+    padding: 15px 16px;
+    border: 1px solid #dbe7f5;
+    border-radius: 14px;
+    background: #ffffff;
+    font: inherit;
+    font-weight: 400;
+    transition: .2s ease;
+}
+
+.citas-formulario textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.citas-formulario input:focus,
+.citas-formulario textarea:focus,
+.citas-formulario select:focus {
+    outline: 4px solid rgba(11,102,216,.14);
+    border-color: #0b66d8;
+}
+
+.campo-completo,
+.citas-formulario button[type="submit"] {
+    grid-column: 1 / -1;
+}
+
+
+/* ==========================================
+   HORARIOS
+========================================== */
+
+.citas-horarios {
+    margin-top: 10px;
+}
+
+.citas-horarios h3 {
+    margin-bottom: 14px;
+    color: #071a36;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.horarios-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 10px;
+}
+
+
+/* ==========================================
+   BOTONES HORARIOS
+========================================== */
+
+.horarios-grid button {
+    min-height: 44px;
+    padding: 10px 8px;
+    border: 1px solid #dbe7f5;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #071a36;
+    font-size: 13px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: .25s ease;
+}
+
+.horarios-grid button:hover {
+    background: #0b66d8;
+    border-color: #0b66d8;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.horarios-grid button.activo {
+    background: #0b66d8;
+    border-color: #0b66d8;
+    color: #ffffff;
+}
+
+.hora-ocupada {
+    background - color: #dc3545;
+    color: white;
+    opacity: 0.4;
+    cursor: not - allowed;
+}
+/* ==========================================
+   BOTON PRINCIPAL
+========================================== */
+
+.citas-formulario button[type="submit"] {
+    width: 100%;
+    min-height: 58px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(
+        135deg,
+        #0b66d8,
+        #10b7e8
+    );
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: .25s ease;
+    box-shadow: 0 12px 28px rgba(11,102,216,.18);
+}
+
+.citas-formulario button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px rgba(11,102,216,.24);
+}
+
+.mensaje-validacion {
+    display: none;
+    margin-top: 12px;
+    color: #eb0017;
+    font-size: 17px;
+    font-weight: 500;
+}
+/* Mensaje de éxito de cita */
+
+
+/* ==========================================
+   MENSAJE
+========================================== */
+
+.citas-mensaje {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #0b66d8;
+}
+/* Mensaje de estado del taller */
+
+.mensaje-estado {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 18px 0;
+    padding: 18px 22px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    border-left: 6px solid #2563eb;
+    box-shadow: 0 12px 25px rgba(249,115,22,.12);
+    animation: aparecerEstado .35s ease;
+}
+
+.icono-estado {
+    font-size: 40px;
+    flex-shrink: 0;
+}
+
+.mensaje-estado strong {
+    display: block;
+    color: #9a3412;
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.mensaje-estado p {
+    margin: 0;
+    color: #7c2d12;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.estado-texto {
+    font-weight: bold;
+    color: inherit; 
+}
+@keyframes aparecerEstado {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:1100px) {
+
+    .citas-page {
+        grid-template-columns: 1fr;
+    }
+
+    .horarios-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media(max-width:700px) {
+
+    .citas-page {
+        width: calc(100% - 28px);
+        padding: 50px 0;
+    }
+
+    .citas-formulario {
+        grid-template-columns: 1fr;
+    }
+
+    .horarios-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .citas-card {
+        padding: 24px;
+    }
+
+    .citas-info h1 {
+        font-size: 40px;
+    }
+}

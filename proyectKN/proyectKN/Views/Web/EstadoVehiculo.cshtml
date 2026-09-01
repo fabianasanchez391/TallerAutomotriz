@@ -1,0 +1,82 @@
+﻿@model proyectKN.Models.VehiculoConsultaSimple
+@{
+    ViewData["Title"] = "Estado del vehículo";
+    Layout = "_LayoutWeb";
+}
+
+<link href="~/css/estadovehiculo.css" rel="stylesheet" />
+
+<section class="vehicle-status-page">
+
+    <div class="vehicle-info reveal">
+
+        <p class="vehicle-tag">Revisión del taller</p>
+
+        <h1>Consulte el avance de su vehículo.</h1>
+
+        <p>
+            Ingrese el número de placa para revisar el progreso registrado
+            por el taller de manera rápida y sencilla.
+        </p>
+
+        <div class="vehicle-features">
+            <span>Seguimiento actualizado</span>
+            <span>Estado del servicio</span>
+            <span>Proceso del taller</span>
+        </div>
+
+    </div>
+
+    <section class="vehicle-panel reveal">
+
+        <div class="vehicle-panel-header">
+
+            <span class="vehicle-indicator"></span>
+
+            <div>
+                <p class="vehicle-tag">Consulta vehicular</p>
+                <h2>Buscar por placa</h2>
+            </div>
+
+        </div>
+
+
+        <form onsubmit="consultarVehiculo(event)" class="vehicle-form">
+
+            <input id="placa" name="placa" placeholder="ABC123" required />
+
+            <button type="submit">
+                Consultar vehículo
+            </button>
+
+        </form>
+
+        <p class="vehicle-message"
+               id="vehicleMessage"
+               aria-live="polite">
+        </p>
+
+    </section>
+
+</section>
+
+
+<div id="modalVehiculo" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+
+        <h2>Estado del vehículo</h2>
+
+        <p><strong>Placa:</strong> <span id="mPlaca"></span></p>
+        <p><strong>Marca:</strong> <span id="mMarca"></span></p>
+        <p><strong>Modelo:</strong> <span id="mModelo"></span></p>
+        <p><strong>Año:</strong> <span id="mAnio"></span></p>
+        <p><strong>Estado:</strong> <span id="mEstado"></span></p>
+        <p><strong>Problema:</strong> <span id="mProblema"></span></p>
+
+        <button onclick="cerrarModal()">Cerrar</button>
+
+    </div>
+</div>
+
+<script src="~/js/estadovehiculo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"> </script>

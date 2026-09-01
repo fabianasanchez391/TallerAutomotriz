@@ -1,0 +1,1156 @@
+﻿
+.dia-seleccionado {
+    background-color: #dbeafe !important;
+    box-shadow: inset 0 0 0 3px #2563eb;
+}
+/* =========================================
+   CONTENEDOR
+========================================= */
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #f3f4f6;
+}
+
+.horario-grid {
+    height: calc(100% - 72px);
+    display: grid;
+    grid-template-columns: minmax(560px, 1.35fr) minmax(420px, 0.9fr);
+    gap: 20px;
+    align-items: stretch;
+    overflow: hidden;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.horario-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+    .horario-header h1 {
+        font-size: 20px;
+        margin: 0;
+        color: #111827;
+        font-weight: 700;
+    }
+
+    .horario-header p {
+        color: #6b7280;
+        font-size: 14px;
+        margin: 6px 0 0;
+    }
+
+
+/* =========================================
+   CARDS
+========================================= */
+
+.calendar-section,
+.config-card {
+    min-height: 0;
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.calendar-section {
+    display: flex;
+    flex-direction: column;
+    min-height: 900px;
+}
+
+.config-card {
+    display: flex;
+    flex-direction: column;
+}
+
+    .config-card h2 {
+        margin: 0 0 6px;
+        font-size: 20px;
+        color: #111827;
+        font-weight: 700;
+    }
+
+    .config-card > p {
+        margin: 0 0 18px;
+        color: #6b7280;
+        font-size: 14px;
+    }
+
+
+/* =========================================
+   FECHA SELECCIONADA
+========================================= */
+
+.selected-date-box {
+    margin-bottom: 12px;
+    padding: 12px 14px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+    .selected-date-box span {
+        display: block;
+        margin-bottom: 6px;
+        color: #6b7280;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .selected-date-box strong {
+        display: block;
+        color: #111827;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+
+/* =========================================
+   FORMULARIO
+========================================= */
+
+.input-group {
+    margin-bottom: 12px;
+}
+
+    .input-group label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+        color: #374151;
+    }
+
+.custom-input {
+    width: 100%;
+    height: 42px;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111827;
+    background: #ffffff;
+    box-sizing: border-box;
+}
+
+    .custom-input:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+    }
+
+
+/* =========================================
+   HORAS DISPONIBLES
+========================================= */
+
+.hours-panel {
+    flex: 1;
+    min-height: 0;
+    margin-top: 4px;
+    padding: 14px 16px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+    .hours-panel.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+.hours-header {
+    margin-bottom: 12px;
+}
+
+    .hours-header span {
+        display: block;
+        color: #111827;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .hours-header small {
+        display: block;
+        margin-top: 4px;
+        color: #6b7280;
+        font-size: 13px;
+    }
+
+
+/* =========================================
+   BOTONES DE HORA
+========================================= */
+
+.hour-btn {
+    min-width: 0;
+    height: 39px;
+    padding: 8px 10px;
+    background: #f8fafc;
+    color: #1f2937;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+}
+
+    .hour-btn:hover {
+        background: #eff6ff;
+        border-color: #2563eb;
+        color: #2563eb;
+        transform: translateY(-2px);
+    }
+
+    .hour-btn.active {
+        background: #2563eb;
+        border-color: #2563eb;
+        color: #ffffff;
+        box-shadow: 0 6px 14px rgba(37, 99, 235, 0.28);
+    }
+
+        .hour-btn.active:hover {
+            background: #1d4ed8;
+            color: #ffffff;
+        }
+
+
+/* =========================================
+   BOTÓN GUARDAR
+========================================= */
+
+.btn-guardar {
+    width: 100%;
+    flex: 0 0 auto;
+    margin-top: 16px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+    .btn-guardar:hover {
+        background: #1d4ed8;
+        transform: translateY(-1px);
+    }
+
+    .btn-guardar:active {
+        transform: translateY(0);
+    }
+
+
+/* =========================================
+   LEYENDA
+========================================= */
+
+.legend-box {
+    flex: 0 0 auto;
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+    .legend-item p {
+        margin: 0;
+        color: #111827;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+.legend-color {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    border-radius: 999px;
+}
+
+    .legend-color.abierto {
+        background: #3b82f6;
+    }
+
+    .legend-color.seleccionado {
+        background: #2563eb;
+    }
+
+    .legend-color.cerrado {
+        background: #fee2e2;
+        border: 1px solid #ef4444;
+    }
+
+    .legend-color.vacaciones {
+        background: #fef3c7;
+        border: 1px solid #eab308;
+    }
+
+
+/* =========================================
+   FULLCALENDAR
+========================================= */
+
+#calendar,
+.fc {
+    width: 100%;
+    flex: 1;
+    min-height: 850px;
+}
+
+    .fc .fc-toolbar {
+        margin-bottom: 18px !important;
+        display: grid !important;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .fc .fc-toolbar-chunk {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+        .fc .fc-toolbar-chunk:first-child {
+            justify-content: flex-start;
+        }
+
+        .fc .fc-toolbar-chunk:nth-child(2) {
+            justify-content: center;
+        }
+
+        .fc .fc-toolbar-chunk:last-child {
+            justify-content: flex-end;
+        }
+
+    .fc .fc-button-group {
+        display: flex !important;
+        gap: 10px;
+    }
+
+        .fc .fc-button-group > .fc-button {
+            margin: 0 !important;
+        }
+
+    .fc .fc-button {
+        min-width: 48px;
+        height: 40px;
+        background: #2563eb !important;
+        color: #ffffff !important;
+        border: none !important;
+        padding: 9px 14px !important;
+        border-radius: 9px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        box-shadow: none !important;
+        text-transform: none !important;
+        transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+        .fc .fc-button:hover {
+            background: #1d4ed8 !important;
+            transform: translateY(-1px);
+        }
+
+        .fc .fc-button:disabled {
+            background: #9ca3af !important;
+            opacity: 1 !important;
+        }
+
+    .fc .fc-toolbar-title {
+        color: #111827;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+.fc-view-harness {
+    height: calc(100% - 58px) !important;
+}
+
+.fc-theme-standard .fc-scrollgrid {
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+    border-color: #e5e7eb;
+}
+
+.fc-col-header-cell {
+    background: #f9fafb;
+}
+
+.fc-col-header-cell-cushion {
+    padding: 10px 4px;
+    color: #6b7280;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.fc-daygrid-day {
+    background: #ffffff;
+    transition: background 0.2s ease;
+}
+
+    .fc-daygrid-day:hover {
+        background: #f3f4f6;
+        cursor: pointer;
+    }
+
+.fc-daygrid-day-frame {
+    min-height: 130px !important;
+}
+
+.fc-daygrid-day-number {
+    padding: 8px 10px;
+    color: #111827;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.fc-day-other .fc-daygrid-day-number {
+    color: #9ca3af;
+}
+
+.fc-day-today {
+    background: #eff6ff !important;
+}
+
+.fc-daygrid-day.dia-seleccionado {
+    background: #dbeafe !important;
+}
+
+
+/* =========================================
+   EVENTOS
+========================================= */
+
+.fc-event {
+    margin: 3px 6px;
+    padding: 6px 8px !important;
+    border-radius: 8px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+}
+
+    .fc-event.estado-abierto {
+        background: #3b82f6 !important;
+        color: white !important;
+    }
+
+    .fc-event.estado-cerrado {
+        background: #fca5a5 !important;
+        color: #111827 !important;
+    }
+
+    .fc-event.estado-vacaciones {
+        background: #fde68a !important;
+        color: #111827 !important;
+    }
+
+
+/* =========================================
+   HORAS DENTRO DEL CALENDARIO
+   UNA DEBAJO DE OTRA
+========================================= */
+
+.horas-calendario {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    padding: 4px 5px;
+    box-sizing: border-box;
+}
+
+.fila-hora {
+    width: 100%;
+    background: #308718;
+    color: #f4f4f4;
+    border-radius: 6px;
+    padding: 5px 4px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    box-sizing: border-box;
+    line-height: 1.2;
+}
+
+    .fila-hora span {
+        display: block;
+        text-align: center;
+        font-weight: 600;
+    }
+
+
+/* =========================================
+   ESTADOS DEL CALENDARIO
+========================================= */
+
+.dia-cerrado {
+    background: #dc2626;
+    color: white;
+    padding: 4px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.dia-vacaciones {
+    background: #f59e0b;
+    color: white;
+    padding: 4px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+/* =========================================
+   COLORES DE EVENTOS
+========================================= */
+
+.fc-event {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.fc .fc-event.estado-abierto,
+.fc .fc-event.estado-cerrado,
+.fc .fc-event.estado-vacaciones,
+.fc .fc-event.estado-abierto .fc-event-main,
+.fc .fc-event.estado-cerrado .fc-event-main,
+.fc .fc-event.estado-vacaciones .fc-event-main,
+.fc .fc-event.estado-abierto .fc-event-title,
+.fc .fc-event.estado-cerrado .fc-event-title,
+.fc .fc-event.estado-vacaciones .fc-event-title,
+.fc .fc-event.estado-abierto *,
+.fc .fc-event.estado-cerrado *,
+.fc .fc-event.estado-vacaciones * {
+    color: #000000 !important;
+}
+
+
+/* =========================================
+   TARJETAS DE HORAS
+========================================= */
+
+.hours-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 12px !important;
+}
+
+.hora-card {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-height: 55px !important;
+    background: #ffffff !important;
+    border: 2px solid #dbe4f0 !important;
+    border-radius: 12px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    font-weight: 600 !important;
+    box-sizing: border-box !important;
+}
+
+    .hora-card input {
+        display: none !important;
+    }
+
+    .hora-card span {
+        color: #1f2937 !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+    }
+
+    .hora-card:hover {
+        border-color: #2563eb !important;
+        background: #eff6ff !important;
+        transform: translateY(-2px);
+    }
+
+    .hora-card:has(input:checked) {
+        background: #2563eb !important;
+        border-color: #2563eb !important;
+    }
+
+        .hora-card:has(input:checked) span {
+            color: white !important;
+        }
+
+    .hora-card:has(input:disabled) {
+        opacity: 0.45 !important;
+    }
+
+
+/* =========================================
+   FILTROS DE FECHA
+========================================= */
+
+.date-range-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+    .date-range-grid > div {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .date-range-grid label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 13px;
+        color: #374151;
+    }
+
+    .date-range-grid input {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+
+/* =========================================
+   SWEETALERT
+========================================= */
+
+.swal2-title {
+    color: #292a2d !important;
+}
+
+.swal2-html-container {
+    color: #475569 !important;
+    font-size: 15px;
+}
+
+.swal2-confirm {
+    font-weight: 600;
+}
+
+
+/* =========================================
+   BOTÓN CANCELAR
+========================================= */
+
+.btn-cancelar {
+    width: 100%;
+    margin-top: 12px;
+    padding: 9px;
+    border: 1px solid #9b9fa5;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #374151;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .btn-cancelar:hover {
+        background: #f9fafb;
+        border-color: #9ca3af;
+        color: #111827;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .btn-cancelar:active {
+        transform: translateY(0);
+    }
+
+    .btn-cancelar i {
+        margin-right: 8px;
+        color: #6b7280;
+    }
+
+
+/* =========================================
+   RESPONSIVE - TABLET
+========================================= */
+
+@media (max-width: 1100px) {
+
+    html,
+    body {
+        overflow: auto;
+    }
+
+    .horario-container {
+        height: auto;
+        min-height: calc(100vh - 80px);
+        padding: 24px 18px;
+        overflow: visible;
+    }
+
+    .horario-grid {
+        height: auto;
+        grid-template-columns: 1fr;
+        overflow: visible;
+    }
+
+    .calendar-section,
+    .config-card {
+        overflow: visible;
+    }
+
+    .hours-grid {
+        grid-template-columns: repeat(4, minmax(76px, 1fr));
+    }
+
+    .hours-panel {
+        overflow: visible;
+    }
+
+    /* Horas del calendario */
+    .horas-calendario {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 100%;
+    }
+
+    .fila-hora {
+        width: 100%;
+    }
+
+    /* Filtros de fecha */
+    .date-range-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+        .date-range-grid > div {
+            min-width: 0;
+        }
+
+        .date-range-grid input {
+            width: 100%;
+        }
+}
+
+
+/* =========================================
+   RESPONSIVE - TABLET PEQUEÑA / CELULAR
+========================================= */
+
+@media (max-width: 768px) {
+
+    .horario-container {
+        padding: 14px;
+    }
+
+    .horario-header {
+        align-items: flex-start;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    .calendar-section,
+    .config-card {
+        padding: 14px;
+    }
+
+    .hours-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* FULLCALENDAR */
+    .fc .fc-toolbar {
+        grid-template-columns: 1fr;
+        justify-items: stretch;
+        gap: 10px;
+    }
+
+    .fc .fc-toolbar-chunk,
+    .fc .fc-toolbar-chunk:first-child,
+    .fc .fc-toolbar-chunk:nth-child(2),
+    .fc .fc-toolbar-chunk:last-child {
+        justify-content: center;
+    }
+
+    .fc .fc-toolbar-title {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    /* Horas del calendario */
+    .horas-calendario {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 100%;
+        padding: 3px 4px;
+    }
+
+    .fila-hora {
+        width: 100%;
+        padding: 5px 3px;
+        font-size: 10px;
+        line-height: 1.2;
+    }
+
+    /* Filtros de fecha */
+    .date-range-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        width: 100%;
+    }
+
+        .date-range-grid > div {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .date-range-grid label {
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+
+        .date-range-grid input {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+}
+
+
+/* =========================================
+   RESPONSIVE - CELULARES PEQUEÑOS
+========================================= */
+
+@media (max-width: 480px) {
+
+    .horario-container {
+        padding: 10px;
+    }
+
+    .calendar-section,
+    .config-card {
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    .horario-header h1 {
+        font-size: 18px;
+    }
+
+    .horario-header p {
+        font-size: 13px;
+    }
+
+    /* Horas */
+    .horas-calendario {
+        gap: 4px;
+        padding: 3px;
+    }
+
+    .fila-hora {
+        padding: 5px 2px;
+        font-size: 10px;
+        border-radius: 5px;
+    }
+
+    /* Filtros */
+    .date-range-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+        .date-range-grid label {
+            font-size: 12px;
+        }
+
+        .date-range-grid input {
+            width: 90%;
+            height: 40px;
+        }
+
+    /* Botones FullCalendar */
+    .fc .fc-button {
+        min-width: 40px;
+        height: 36px;
+        padding: 7px 10px !important;
+        font-size: 12px !important;
+    }
+
+    .fc .fc-toolbar-title {
+        font-size: 16px;
+    }
+}
+
+
+.horario-grid {
+    margin-bottom: 15px;
+}
+
+
+/* =========================================
+   HORAS - PANTALLAS PEQUEÑAS
+========================================= */
+
+@media (max-width: 768px) {
+
+    .horas-calendario {
+        gap: 3px;
+        padding: 2px;
+    }
+
+    .fila-hora {
+        width: 100%;
+        padding: 3px 1px;
+        font-size: 9px;
+        line-height: 1.1;
+        border-radius: 4px;
+    }
+
+        .fila-hora span {
+            font-size: 9px;
+            line-height: 1.1;
+        }
+}
+
+
+/* =========================================
+   HORAS - CELULARES PEQUEÑOS
+========================================= */
+
+@media (max-width: 480px) {
+
+    .horas-calendario {
+        gap: 3px;
+        padding: 2px 1px;
+    }
+
+    .fila-hora {
+        padding: 3px 1px;
+        font-size: 8px;
+        line-height: 1.1;
+    }
+
+        .fila-hora span {
+            font-size: 8px;
+            line-height: 1.1;
+        }
+}
+
+
+/* =========================================
+   HORAS DEL CALENDARIO
+   NO TOCAR CERRADO / VACACIONES
+========================================= */
+
+.horas-calendario {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 4px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 3px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+    .horas-calendario .fila-hora {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        background: #308718 !important;
+        color: #f4f4f4 !important;
+        border-radius: 5px !important;
+        padding: 4px 2px !important;
+        text-align: center !important;
+        font-size: 10px !important;
+        font-weight: 700 !important;
+        line-height: 1.15 !important;
+        white-space: normal !important;
+        overflow: hidden !important;
+        overflow-wrap: normal !important;
+        word-break: normal !important;
+    }
+
+        .horas-calendario .fila-hora span {
+            display: block !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            text-align: center !important;
+            font-size: inherit !important;
+            font-weight: 600 !important;
+            white-space: normal !important;
+        }
+
+
+/* =========================================
+   CERRADO
+========================================= */
+
+.fc .dia-cerrado {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    background: #dc2626 !important;
+    color: white !important;
+    padding: 4px 2px !important;
+    border-radius: 6px !important;
+    text-align: center !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    line-height: 1.2 !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    overflow: hidden !important;
+}
+
+
+/* =========================================
+   VACACIONES
+========================================= */
+
+.fc .dia-vacaciones {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    background: #f59e0b !important;
+    color: white !important;
+    padding: 4px 2px !important;
+    border-radius: 6px !important;
+    text-align: center !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    line-height: 1.2 !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    overflow: hidden !important;
+}
+
+/* =========================================
+   CELULAR
+========================================= */
+@media (max-width: 768px) {
+
+    /* HORAS */ .horas-calendario .fila-hora {
+        padding: 3px 1px !important;
+        font-size: 9px !important;
+        line-height: 1.1 !important;
+    }
+
+        .horas-calendario .fila-hora span {
+            font-size: 9px !important;
+        }
+
+    /* CERRADO / VACACIONES */ .fc .dia-cerrado,
+    .fc .dia-vacaciones {
+        padding: 4px 1px !important;
+        font-size: 9px !important;
+        line-height: 1.1 !important;
+
+        .date-range-grid {
+            gap: 7px !important;
+        }
+
+            .date-range-grid label {
+                margin-bottom: 3px !important;
+                font-size: 11px !important;
+            }
+
+            .date-range-grid input {
+                height: 34px !important;
+                padding: 6px 8px !important;
+                font-size: 12px !important;
+                border-radius: 7px !important;
+            }
+    }
+}
+
+}
+
+/* =========================================
+   CELULARES MUY PEQUEÑOS
+========================================= */ @media (max-width: 480px) {
+
+    /* HORAS */ .horas-calendario .fila-hora {
+        padding: 3px 1px !important;
+        font-size: 8px !important;
+        line-height: 1.1 !important;
+    }
+
+        .horas-calendario .fila-hora span {
+            font-size: 8px !important;
+        }
+
+    /* CERRADO / VACACIONES */ .fc .dia-cerrado,
+    .fc .dia-vacaciones {
+        padding: 3px 1px !important;
+        font-size: 8px !important;
+        line-height: 1.1 !important;
+
+        .date-range-grid {
+            gap: 6px !important;
+        }
+
+            .date-range-grid label {
+                margin-bottom: 2px !important;
+                font-size: 10px !important;
+            }
+
+            .date-range-grid input {
+                height: 32px !important;
+                padding: 5px 7px !important;
+                font-size: 11px !important;
+                border-radius: 6px !important;
+            }
+    }
+}
+ 

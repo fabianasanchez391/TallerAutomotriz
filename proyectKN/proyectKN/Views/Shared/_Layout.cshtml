@@ -1,0 +1,186 @@
+﻿@{
+    var rol = Context.Session.GetString("RolUsuario");
+    var nombre = Context.Session.GetString("NombreUsuario");
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - Taller La Unión</title>
+
+    <link rel="stylesheet" href="~/css/sidebar.css" />
+    <link href="~/css/card.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="shortcut icon" href="~/lib/img/logo.jpeg" />
+</head>
+
+<body>
+
+    <button type="button" class="mobile-menu-btn" onclick="toggleMenu()">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <div class="sidebar" id="sidebar">
+
+        <div class="sidebar-top">
+            <div class="logo-text">Taller La Unión</div>
+
+            <button type="button" class="toggle-btn" onclick="toggleMenu()">
+                <i id="toggleIcon" class="fa-solid fa-angle-left"></i>
+            </button>
+        </div>
+
+        @if (nombre != null)
+        {
+            <div class="sidebar-user">
+                <div class="user-box">
+                    <div class="user-avatar">
+                        @nombre.Substring(0, 1).ToUpper()
+                    </div>
+                    <div class="user-info">
+                        <strong>@nombre</strong>
+                        <span>@rol</span>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="menu">
+
+            <div class="menu-title">Gestión</div>
+
+            <a class="menu-item @(currentController == "Home" ? "active" : "")"
+               asp-controller="Home" asp-action="Index">
+                <i class="fas fa-house"></i>
+                <span class="menu-text">Inicio</span>
+            </a>
+
+            @if (rol == "Administrador")
+            {
+                <a class="menu-item @(currentController == "Usuario" ? "active" : "")"
+                   asp-controller="Usuario" asp-action="RegistroUsuario">
+                    <i class="fas fa-users"></i>
+                    <span class="menu-text">Usuarios</span>
+                </a>
+            }
+
+            <a class="menu-item @(currentController == "Vehiculo" ? "active" : "")"
+               asp-controller="Vehiculo" asp-action="RegistroVehiculo">
+                <i class="fas fa-car"></i>
+                <span class="menu-text">Vehículos</span>
+            </a>
+
+            <a class="menu-item @(currentController == "Cita" ? "active" : "")"
+               asp-controller="Cita" asp-action="RegistroCita">
+                <i class="fas fa-calendar-check"></i>
+                <span class="menu-text">Citas</span>
+            </a>
+
+           
+
+            @if (rol == "Administrador" || rol == "Encargado")
+            {
+                <div class="menu-title">Sistema</div>
+
+                <a class="menu-item @(currentController == "Inventario" ? "active" : "")"
+                   asp-controller="Inventario" asp-action="RegistroInventario">
+                    <i class="fas fa-boxes"></i>
+                    <span class="menu-text">Inventario</span>
+                </a>
+
+                <a class="menu-item @(currentController == "Proveedor" ? "active" : "")"
+                   asp-controller="Proveedor" asp-action="RegistroProveedor">
+                    <i class="fas fa-truck"></i>
+                    <span class="menu-text">Proveedores</span>
+                </a>
+
+                <a class="menu-item @(currentController == "Contavilidad" && currentAction == "RegistroIngreso" ? "active" : "")"
+                   asp-controller="Contavilidad"
+                   asp-action="RegistroIngreso">
+                    <i class="fas fa-money-bill-trend-up"></i>
+                    <span class="menu-text">Ingresos</span>
+                </a>
+
+                <a class="menu-item @(currentController == "Contavilidad" && currentAction == "RegistroEgreso" ? "active" : "")"
+                   asp-controller="Contavilidad"
+                   asp-action="RegistroEgreso">
+                    <i class="fas fa-arrow-down"></i>
+                    <span class="menu-text">Egresos</span>
+                </a>
+
+                <a class="menu-item @(currentController == "Horario" ? "active" : "")"
+                   asp-controller="Horario" asp-action="GestionHorario">
+                    <i class="fas fa-clock"></i>
+                    <span class="menu-text">Horarios</span>
+                </a>
+            }
+            @if (rol == "Administrador")
+            {
+                <a class="menu-item @(currentController == "Reporteria" ? "active" : "")"
+                   asp-controller="Reporteria" asp-action="Reporteria">
+                    <i class="fas fa-chart-bar"></i>
+                    <span class="menu-text">Reportes</span>
+                </a>
+            }
+
+
+
+        </div>
+
+        <div class="sidebar-footer">
+            <a class="logout-btn"
+               asp-controller="Home" asp-action="CerrarSesion">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="logout-text">Cerrar sesión</span>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="main">
+
+        <div class="container-fluid p-4">
+            @if (TempData["Success"] != null || TempData["Error"] != null)
+            {
+                <div id="mensajeSistema"
+                     class="mensaje-sistema @(TempData["Error"] != null ? "error" : "success")">
+
+                    <i class="fa-solid @(TempData["Error"] != null ? "fa-circle-exclamation" : "fa-circle-check")"></i>
+
+                    <span>
+                        @(TempData["Error"] ?? TempData["Success"])
+                    </span>
+
+                </div>
+            }
+            @RenderBody()
+
+        </div>
+
+        <footer class="main-footer">
+            © <script>document.write(new Date().getFullYear())</script> Taller La Unión
+        </footer>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="~/js/sidebar.js"></script>
+    <script src="~/js/mensaje.js"></script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

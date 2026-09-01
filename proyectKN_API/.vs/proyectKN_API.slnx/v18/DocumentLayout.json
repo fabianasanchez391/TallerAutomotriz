@@ -1,0 +1,198 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|c:\\proyectofinal_taller (1)\\proyectofinal (3)\\proyectofinal\\proyectkn_api\\proyectkn_api\\controllers\\citacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|solutionrelative:proyectkn_api\\controllers\\citacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|c:\\proyectofinal_taller (1)\\proyectofinal (3)\\proyectofinal\\proyectkn_api\\proyectkn_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|solutionrelative:proyectkn_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|c:\\proyectofinal_taller (1)\\proyectofinal (3)\\proyectofinal\\proyectkn_api\\proyectkn_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|solutionrelative:proyectkn_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|c:\\proyectofinal_taller (1)\\proyectofinal (3)\\proyectofinal\\proyectkn_api\\proyectkn_api\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|solutionrelative:proyectkn_api\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|c:\\proyectofinal_taller (1)\\proyectofinal (3)\\proyectofinal\\proyectkn_api\\proyectkn_api\\controllers\\vehiculocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|solutionrelative:proyectkn_api\\controllers\\vehiculocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|c:\\proyectofinal_taller (1)\\proyectofinal (3)\\proyectofinal\\proyectkn_api\\proyectkn_api\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|solutionrelative:proyectkn_api\\controllers\\usuariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|c:\\proyectofinal_taller (1)\\proyectofinal (3)\\proyectofinal\\proyectkn_api\\proyectkn_api\\models\\vehiculorequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|solutionrelative:proyectkn_api\\models\\vehiculorequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|c:\\proyectofinal_taller (1)\\proyectofinal (3)\\proyectofinal\\proyectkn_api\\proyectkn_api\\models\\vehiculoresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|solutionrelative:proyectkn_api\\models\\vehiculoresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|c:\\proyectofinal_taller (1)\\proyectofinal (3)\\proyectofinal\\proyectkn_api\\proyectkn_api\\controllers\\contabilidadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|solutionrelative:proyectkn_api\\controllers\\contabilidadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|c:\\proyectofinal_taller (1)\\proyectofinal (3)\\proyectofinal\\proyectkn_api\\proyectkn_api\\controllers\\proveedorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|solutionrelative:proyectkn_api\\controllers\\proveedorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|c:\\proyectofinal_taller (1)\\proyectofinal (3)\\proyectofinal\\proyectkn_api\\proyectkn_api\\controllers\\inventariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D76FB83-6C75-6E8A-E80C-301AA23347F4}|proyectKN_API\\proyectKN_API.csproj|solutionrelative:proyectkn_api\\controllers\\inventariocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 235,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CitaController.cs",
+              "DocumentMoniker": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Controllers\\CitaController.cs",
+              "RelativeDocumentMoniker": "proyectKN_API\\Controllers\\CitaController.cs",
+              "ToolTip": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Controllers\\CitaController.cs",
+              "RelativeToolTip": "proyectKN_API\\Controllers\\CitaController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAG8AAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-21T02:28:14.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "proyectKN_API\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "proyectKN_API\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAgwHsAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-08T04:06:44.492Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\appsettings.json",
+              "RelativeDocumentMoniker": "proyectKN_API\\appsettings.json",
+              "ToolTip": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\appsettings.json",
+              "RelativeToolTip": "proyectKN_API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-08-07T03:29:55.593Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Program.cs",
+              "RelativeDocumentMoniker": "proyectKN_API\\Program.cs",
+              "ToolTip": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Program.cs",
+              "RelativeToolTip": "proyectKN_API\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-08T04:42:07.351Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "VehiculoController.cs",
+              "DocumentMoniker": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Controllers\\VehiculoController.cs",
+              "RelativeDocumentMoniker": "proyectKN_API\\Controllers\\VehiculoController.cs",
+              "ToolTip": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Controllers\\VehiculoController.cs",
+              "RelativeToolTip": "proyectKN_API\\Controllers\\VehiculoController.cs",
+              "ViewState": "AgIAAG4AAAAAAAAAAAAwwKQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-25T18:57:55.485Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UsuarioController.cs",
+              "DocumentMoniker": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Controllers\\UsuarioController.cs",
+              "RelativeDocumentMoniker": "proyectKN_API\\Controllers\\UsuarioController.cs",
+              "ToolTip": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Controllers\\UsuarioController.cs",
+              "RelativeToolTip": "proyectKN_API\\Controllers\\UsuarioController.cs",
+              "ViewState": "AgIAAJEAAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-25T18:57:54.816Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "VehiculoResponse.cs",
+              "DocumentMoniker": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Models\\VehiculoResponse.cs",
+              "RelativeDocumentMoniker": "proyectKN_API\\Models\\VehiculoResponse.cs",
+              "ToolTip": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Models\\VehiculoResponse.cs",
+              "RelativeToolTip": "proyectKN_API\\Models\\VehiculoResponse.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAQwBEAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-25T18:46:38.463Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "VehiculoRequest.cs",
+              "DocumentMoniker": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Models\\VehiculoRequest.cs",
+              "RelativeDocumentMoniker": "proyectKN_API\\Models\\VehiculoRequest.cs",
+              "ToolTip": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Models\\VehiculoRequest.cs",
+              "RelativeToolTip": "proyectKN_API\\Models\\VehiculoRequest.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAmwB0AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-25T18:44:43.83Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ContabilidadController.cs",
+              "DocumentMoniker": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Controllers\\ContabilidadController.cs",
+              "RelativeDocumentMoniker": "proyectKN_API\\Controllers\\ContabilidadController.cs",
+              "ToolTip": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Controllers\\ContabilidadController.cs",
+              "RelativeToolTip": "proyectKN_API\\Controllers\\ContabilidadController.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwJwAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-25T17:50:42.08Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "InventarioController.cs",
+              "DocumentMoniker": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Controllers\\InventarioController.cs",
+              "RelativeDocumentMoniker": "proyectKN_API\\Controllers\\InventarioController.cs",
+              "ToolTip": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Controllers\\InventarioController.cs",
+              "RelativeToolTip": "proyectKN_API\\Controllers\\InventarioController.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowCsAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-25T15:52:32.325Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ProveedorController.cs",
+              "DocumentMoniker": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Controllers\\ProveedorController.cs",
+              "RelativeDocumentMoniker": "proyectKN_API\\Controllers\\ProveedorController.cs",
+              "ToolTip": "C:\\ProyectoFinal_taller (1)\\ProyectoFinal (3)\\ProyectoFinal\\proyectKN_API\\proyectKN_API\\Controllers\\ProveedorController.cs",
+              "RelativeToolTip": "proyectKN_API\\Controllers\\ProveedorController.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAowCoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-24T06:06:27.188Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

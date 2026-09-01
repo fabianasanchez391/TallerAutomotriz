@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Taller La Unión</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="~/css/sitioweb.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header class="site-header">
+
+        <a class="brand" asp-controller="Web" asp-action="Web">
+            <span class="brand-mark">TU</span>
+            <span>Taller La Unión</span>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle">
+            ☰
+        </button>
+
+        <div class="mobile-menu" id="mobileMenu">
+
+            <nav class="main-nav">
+                <a asp-controller="web" asp-action="web" asp-fragment="nosotros">Nosotros</a>
+                <a asp-controller="web" asp-action="web" asp-fragment="servicios">Servicios</a>
+                <a asp-controller="web" asp-action="web" asp-fragment="proceso">Proceso</a>
+                <a asp-controller="web" asp-action="web" asp-fragment="ubicacion">Ubicación</a>
+            </nav>
+
+            <div class="header-actions">
+                <a class="nav-login"
+                    asp-controller="home" asp-action="login" asp-fragment="login">
+                        Inicio Sesión</a>
+            </div>
+
+        </div>
+
+    </header>
+
+    @if (TempData["Success"] != null || TempData["Error"] != null)
+    {
+        <div id="mensajeSistema"
+             class="mensaje-sistema @(TempData["Error"] != null ? "error" : "success")">
+
+            <i class="fa-solid @(TempData["Error"] != null ? "fa-circle-exclamation" : "fa-circle-check")"></i>
+
+            <span>
+                @(TempData["Success"] ?? TempData["Error"])
+            </span>
+
+        </div>
+    }
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <strong>Taller La Unión</strong>
+            <p>Diagnóstico, mantenimiento y reparación automotriz.</p>
+        </div>
+
+        <a href="https://wa.me/50688887777?text=Hola%2C%20quiero%20agendar%20una%20revisión"
+               target="_blank"
+               rel="noopener">
+            Contactar por WhatsApp
+        </a>
+    </footer>
+
+    <script src="~/js/sitioweb.js"></script>
+</body>
+</html>

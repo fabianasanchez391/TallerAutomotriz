@@ -1,0 +1,462 @@
+﻿/* ==========================================
+   PAGINA REVISION VEHICULO
+========================================== */
+
+:root {
+    --bg: #ffffff;
+    --card: #ffffff;
+    --surface: #f5f9ff;
+    --line: #d9e6f4;
+    --text: #102038;
+    --muted: #5d6b7c;
+    --primary: #0b66d8;
+    --primary-dark: #084ca1;
+    --accent: #12b8df;
+    --navy: #071a36;
+    --shadow: 0 20px 48px rgba(11,102,216,.12);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* ==========================================
+   CONTENEDOR PRINCIPAL
+========================================== */
+
+.vehicle-status-page {
+    display: grid;
+    grid-template-columns: minmax(0,.9fr) minmax(360px,.74fr);
+    gap: clamp(30px,6vw,78px);
+    align-items: center;
+    width: min(1120px,calc(100% - 36px));
+    min-height: calc(100vh - 90px);
+    margin: 0 auto;
+    padding: 70px 0;
+}
+
+
+/* ==========================================
+   INFORMACION
+========================================== */
+
+.vehicle-info {
+    position: relative;
+}
+
+.vehicle-tag {
+    margin: 0 0 14px;
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.vehicle-info h1 {
+    max-width: 650px;
+    margin: 0;
+    color: var(--navy);
+    font-size: clamp(40px,5vw,64px);
+    line-height: 1.05;
+    font-weight: 400;
+}
+
+.vehicle-info p {
+    max-width: 580px;
+    margin: 22px 0;
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.7;
+    font-weight: 400;
+}
+
+
+/* ==========================================
+   ETIQUETAS
+========================================== */
+
+.vehicle-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+    .vehicle-features span {
+        padding: 11px 18px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #ffffff;
+        color: var(--primary);
+        font-size: 13px;
+        font-weight: 400;
+        box-shadow: 0 8px 18px rgba(15,23,42,.04);
+    }
+
+
+/* ==========================================
+   PANEL
+========================================== */
+
+.vehicle-panel {
+    position: relative;
+    overflow: hidden;
+    padding: 34px;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background: rgba(255,255,255,.95);
+    box-shadow: var(--shadow);
+}
+
+    .vehicle-panel::before {
+        content: "";
+        position: absolute;
+        top: -90px;
+        right: -90px;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: linear-gradient( 135deg, rgba(11,102,216,.14), rgba(18,184,223,.20) );
+    }
+
+
+/* ==========================================
+   ENCABEZADO PANEL
+========================================== */
+
+.vehicle-panel-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+    .vehicle-panel-header h2 {
+        margin: 0;
+        color: var(--navy);
+        font-size: 30px;
+        line-height: 1.1;
+        font-weight: 400;
+    }
+
+.vehicle-indicator {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 rgba(18,184,223,.5);
+    animation: mechanicPulse 1.8s infinite;
+}
+
+
+/* ==========================================
+   FORMULARIO
+========================================== */
+
+.vehicle-form {
+    position: relative;
+    display: grid;
+    gap: 18px;
+}
+
+    .vehicle-form label {
+        display: grid;
+        gap: 8px;
+        color: var(--navy);
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    .vehicle-form input {
+        width: 100%;
+        min-height: 58px;
+        padding: 15px 16px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #ffffff;
+        color: var(--text);
+        font: inherit;
+        font-weight: 400;
+        transition: .2s ease;
+        text-transform: uppercase;
+    }
+
+        .vehicle-form input:focus {
+            outline: 4px solid rgba(11,102,216,.14);
+            border-color: var(--primary);
+        }
+
+
+    /* ==========================================
+   BOTON
+========================================== */
+
+    .vehicle-form button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 56px;
+        padding: 14px 20px;
+        border: none;
+        border-radius: 14px;
+        background: linear-gradient( 135deg, var(--primary), var(--accent) );
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 400;
+        cursor: pointer;
+        transition: .25s ease;
+        box-shadow: 0 12px 28px rgba(11,102,216,.22);
+    }
+
+        .vehicle-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 34px rgba(11,102,216,.30);
+        }
+
+
+/* ==========================================
+   MENSAJES
+========================================== */
+
+.vehicle-message {
+    min-height: 24px;
+    margin-top: 18px;
+    color: var(--primary-dark);
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+}
+
+    .vehicle-message.error {
+        color: #dc2626;
+    }
+
+
+/* ==========================================
+   ANIMACION
+========================================== */
+
+@keyframes mechanicPulse {
+
+    0% {
+        box-shadow: 0 0 0 0 rgba(18,184,223,.5);
+    }
+
+    70% {
+        box-shadow: 0 0 0 14px rgba(18,184,223,0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(18,184,223,0);
+    }
+}
+
+
+/* ==========================================
+   ANIMACION REVEAL
+========================================== */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .7s ease, transform .7s ease;
+}
+
+    .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 350px;
+    position: relative;
+}
+
+.hidden {
+    display: none;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 20px;
+}
+.modal-vehiculo {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-contenido {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(7, 26, 54, 0.65);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* CAJA DEL MODAL */
+.modal-box {
+    width: min(460px, 92%);
+    padding: 28px;
+    border-radius: 20px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    box-shadow: 0 30px 80px rgba(7, 26, 54, 0.35);
+    animation: modalPop .25s ease;
+}
+
+    /* TITULO */
+    .modal-box h2 {
+        margin: 0 0 18px;
+        color: var(--navy);
+        font-weight: 400;
+    }
+
+    /* TEXTO */
+    .modal-box p {
+        margin: 10px 0;
+        font-size: 15px;
+        color: var(--text);
+    }
+
+    /* LABELS EN NEGRITA */
+    .modal-box strong {
+        color: var(--primary);
+    }
+
+    /* BOTON */
+    .modal-box button {
+        margin-top: 18px;
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        box-shadow: 0 12px 28px rgba(11,102,216,.25);
+        transition: .25s ease;
+    }
+
+        .modal-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 36px rgba(11,102,216,.35);
+        }
+    .modal-box p {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--line);
+    }
+
+.vehicle-message {
+    display: none;
+    opacity: 0;
+    transition: opacity .4s ease;
+}
+
+    .vehicle-message.error {
+        display: block;
+        opacity: 1;
+        margin: 15px auto;
+        background: linear-gradient(135deg, #eff6ff, #dbeafe);
+        color: #1e40af;
+        border: 1px solid #93c5fd;
+        border-left: 5px solid #2563eb;
+        border-radius: 14px;
+        padding: 14px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+        animation: slideDown 0.4s ease;
+    }
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ANIMACION */
+@keyframes modalPop {
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 980px) {
+
+    .vehicle-status-page {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .vehicle-status-page {
+        width: min(100% - 28px,1120px);
+        padding: 50px 0;
+    }
+
+    .vehicle-panel {
+        padding: 26px;
+    }
+
+    .vehicle-info h1 {
+        font-size: 40px;
+    }
+}
+ 

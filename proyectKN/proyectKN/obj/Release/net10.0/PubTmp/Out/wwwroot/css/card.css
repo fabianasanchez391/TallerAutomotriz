@@ -1,0 +1,134 @@
+﻿.paginacion {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.paginacion button {
+    min-width: 42px;
+    height: 42px;
+    border: none;
+    background: transparent;
+    color: #2563eb;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all .2s ease;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: none;
+    padding: 0 6px;
+}
+
+    .paginacion button:hover:not(:disabled) {
+        color: #1d4ed8;
+        transform: translateY(-1px);
+    }
+
+    .paginacion button:disabled {
+        opacity: .4;
+        cursor: not-allowed;
+        color: #94a3b8;
+    }
+
+
+
+.pagina-actual {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    background: transparent;
+    box-shadow: none;
+    padding: 0 4px;
+}
+
+
+
+
+
+/* ===== CARD ===== */
+.card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border: 1px solid var(--border);
+}
+
+/* HEADER */
+.card-header {
+    margin-bottom: 15px;
+}
+
+    .card-header h2 {
+        font-size: 20px;
+        color: var(--text);
+    }
+
+/* ===== TABLA ===== */
+.table-container {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    /* ENCABEZADO */
+    .table thead th {
+        font-size: 13px;
+        color: var(--muted);
+        padding: 12px;
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+    }
+
+    /* FILAS */
+    .table tbody td {
+        padding: 14px 12px;
+        border-bottom: 1px solid var(--border);
+        font-size: 14px;
+        text-align: left;
+    }
+
+    /* HOVER */
+    .table tbody tr:hover {
+        background: var(--hover);
+    }
+
+/* ===== BADGES ===== */
+.badge {
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* ESTADOS */
+.ingresado {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.revisado {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.reparado{
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+
+/* FILAS ALTERNADAS (ZEBRA) */
+.table tbody tr:nth-child(even) {
+    background: #e9ecef; /* gris muy suave */
+}
+
+.table tbody tr:nth-child(odd) {
+    background: #ffffff; /* blanco */
+}
